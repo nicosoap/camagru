@@ -1,0 +1,214 @@
+@font-face {
+    font-family: Camagru;
+    src: url(font/camagru.otf);
+}
+@font-face {
+    font-family: Camagru-2;
+    src: url(font/camagru-2.otf);
+}
+body {
+    background-color : darkgrey;
+    font-family: Camagru-2, sans-serif;
+    font-kerning: normal;
+    font-weight: 100;
+    color: white;
+    margin: 0;
+    height: 100%;
+}
+.contener {
+    width: 100%;
+    height: 100%;
+}
+
+.header #title {
+    margin-right: 3vw;
+    text-overflow: clip;
+    text-overflow: ellipsis;
+    text-overflow-ellipsis: "!!!";
+}
+@media only screen and (min-device-width: 320px) and (max-device-width: 667px) and (orientation : portrait) {
+    body {
+        font-size: 3.5vmax;
+    }
+    .header {
+        width: 100%;
+        min-width: 320px;
+        height: 15vh;
+        float: left;
+    }
+    .header .img{
+        height: 11vmin;
+        margin: 0.8vh 1vw 0.5vh;
+    }
+    .header img{
+        height: 11vmin;
+    }
+    .main {
+        width: 100vw;
+        height: 50vh;
+        float: left;
+    }
+    .sidebar {
+        width: 100%;
+        height: 25vh;
+        float: left;
+    }
+    .footer {
+        width: 100%;
+        height: 8vh;
+        float: left;
+        text-align: center;
+    }
+}
+@media only screen and (min-device-width : 375px) and (max-device-width : 732px) and (orientation : landscape) {
+    body {
+        font-size: 3.5vmax;
+    }
+    .header {
+        width: 100%;
+        min-width: 320px;
+        float: left;
+        line-height: 13vh;
+        height: 13vh;
+    }
+    .header .img{
+        height: 7vmin;
+        margin: 0.8vh 1vw 0.5vh;
+    }
+    .header img{
+        height: 7vmax;
+    }
+    .main {
+        width: 70%;
+        height: 80vh;
+        float: left;
+        padding: 0;
+    }
+    .sidebar {
+        width: 30%;
+        height: 80vh;
+        float: left;
+    }
+    .footer {
+        width: 100%;
+        height: 7vh;
+        float: left;
+        text-align: center;
+    }
+}
+@media only screen and (min-device-width: 733px) {
+    body {
+        font-size: 3vmax;
+    }
+    .header {
+        width: 100%;
+        min-width: 320px;
+        float: left;
+    }
+    .header .img{
+        height: 12vh;
+        margin: 1.5vh 2vw 0.5vh 0;
+    }
+    .header img{
+        height: 11vmin;
+    }
+    .main {
+        width: 70%;
+        height: 80%;
+        float: left;
+    }
+    .sidebar {
+        width: 30%;
+        float: left;
+    }
+    .footer {
+        width: 100%;
+        float: left;
+        text-align: center;
+    }
+}
+@media tv {
+
+}
+
+h1 {
+    font-family: Camagru, "Helvetica-Neue", "Helvetica", "Arial", sans-serif;
+    color: white;
+    font-weight: 200;
+    font-size: 16vmin;
+    line-height: 12vmin;
+    height: 13vmin;
+    margin: -0.5vh 0 0.5vh 0;
+    display: inline-block;
+    text-overflow: clip;
+    text-overflow: ellipsis;
+    text-overflow-ellipsis: "!!!";
+}
+a {
+    color: white;
+    text-decoration: none;
+}
+a:hover {
+    color: hotpink;
+    text-decoration: none;
+}
+.stick-right {
+    margin: 2vh 2vw;
+    float: right;
+    display: inline-block;
+    line-height: 100%;
+}
+#videoElement {
+    width: 100%;
+    height: 80%;
+    background-image: url("img/videobg.png");
+}
+#canvas {
+    visibility: hidden;
+}
+#snap {
+    width: 100%;
+    height: 20%;
+    font-size: 3.5vmax;
+}
+.centered {
+    display: inline-block;
+    float: left;
+    width: 100vw;
+}
+.centered input {
+    padding-left: 2vw;
+    width: 100%;
+    border: none;
+    border-bottom: 3vh solid darkgrey;
+    color: darkgrey;
+    background-color: white;
+    font-size: inherit;
+    font-family: inherit;
+ }
+.centered input:hover {
+    padding-left: 2vw;
+    background-color: hotpink;
+    border: none;
+    border-bottom: 3vh solid darkgrey;
+    color: white;
+}
+.centered input:focus {
+    padding-left: 2vw;
+    background-color: hotpink;
+    border: none;
+    border-bottom: 3vh solid darkgrey;
+    color: white;
+}
+.form {
+    padding-left: 4vw;
+    margin-top: 4vh;
+    width: 100%;
+    border: none;
+    border-bottom: 3vh solid darkgrey;
+    color: darkgrey;
+    background-color: white;
+    font-size: inherit;
+    font-family: inherit;
+    box-sizing: content-box;
+}
