@@ -47,6 +47,8 @@ try {
                   token_id int(11) NOT NULL AUTO_INCREMENT,
                   user_id int(11) NOT NULL,
                   token TEXT NOT NULL,
+                  usag TEXT NOT NULL,
+                  status BOOLEAN DEFAULT TRUE,
                   PRIMARY KEY (token_id),
                   FOREIGN KEY (user_id) REFERENCES user(user_id)
                   ) COMMENT='Likes table';");

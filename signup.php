@@ -6,7 +6,6 @@
  * Time: 03:03
  */
 session_start();
-require_once ("config/pdo_connect.php");
 
 if (isset($_POST["submit"]) && $_POST['submit'] == 'SUBMIT!')
 {
@@ -15,6 +14,8 @@ if (isset($_POST["submit"]) && $_POST['submit'] == 'SUBMIT!')
         $password = hash("whirlpool", $_POST["passwd1"]);
         $login = $_POST['login'];
         $email = $_POST['email'];
+
+        include("config/pdo_connect.php");
         try {
             $stmt = $pdo_connect->prepare("INSERT INTO user ( login, password, email )
                   VALUES (:login, :password, :email);");
@@ -26,7 +27,23 @@ if (isset($_POST["submit"]) && $_POST['submit'] == 'SUBMIT!')
             echo 'Connection failed: ' . $e->getMessage();
             header("Location: error.html");
         }
-        $token = 'test_token';
+        $pdo_connect = Null;
+        try {
+            $pdo_connect = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
+            $pdo_connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            echo 'Connection failed: ' . $e->getMessage();
+        }
+        $token = md5($login.time());
+        try {
+            $token_query = $pdo_connect->prepare("INSERT INTO tokens (user_id, token, usag) SELECT (user_id, :token, 'signup') FROM user WHERE login =:login");
+            $token_query->bindParam(":token", $token, PDO::PARAM_STR);
+            $token_query->bindParam(":login", $login, PDO::PARAM_STR);
+            $token_query->execute();
+        } catch (PDOException $e) {
+            echo 'Connection failed: '. $e->getMessage();
+            header("Location :error.html");
+        }
         $email_headers = "From: contact@liveoption.io\r\n";
         $email_headers .= "MIME-Version: 1.0\r\n";
         $email_headers .= "Content-type: text/html; charset=ISO-8859-1\r\n";
@@ -40,13 +57,17 @@ if (isset($_POST["submit"]) && $_POST['submit'] == 'SUBMIT!')
         $email_content .= "browser :\r\n";
         $email_content .= "localhost/camagru/verify.php?token_id=$token\r\n";
         $email_content .= "</body></html>";
+
+        /**
         if ( mail($email, "Verify your CAMAGRU account", "test" )) {
             $pdo_connect= Null;
             header("Location: index.php");
         } else {
 
-            print_r(error_get_last());
-        }
+            print_r(error_get_last());*/
+
+        header ("Location: index.php");
+
     }
     
 } else {

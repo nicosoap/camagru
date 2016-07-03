@@ -180,7 +180,7 @@ a:hover {
     padding-left: 2vw;
     width: 100%;
     border: none;
-    border-bottom: 3vh solid darkgrey;
+    border-top: 3vh solid darkgrey;
     color: darkgrey;
     background-color: white;
     font-size: inherit;
@@ -190,14 +190,14 @@ a:hover {
     padding-left: 2vw;
     background-color: hotpink;
     border: none;
-    border-bottom: 3vh solid darkgrey;
+    border-top: 3vh solid darkgrey;
     color: white;
 }
 .centered input:focus {
     padding-left: 2vw;
     background-color: hotpink;
     border: none;
-    border-bottom: 3vh solid darkgrey;
+    border-top: 3vh solid darkgrey;
     color: white;
 }
 .form {
@@ -205,7 +205,7 @@ a:hover {
     margin-top: 4vh;
     width: 100%;
     border: none;
-    border-bottom: 3vh solid darkgrey;
+    border-top: 3vh solid darkgrey;
     color: darkgrey;
     background-color: white;
     font-size: inherit;
