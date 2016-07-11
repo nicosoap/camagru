@@ -9,9 +9,9 @@ require_once ("database.php");
 try {
     $pdo_connect = new PDO('mysql:host=localhost', $DB_USER, $DB_PASSWORD);
     $pdo_connect ->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $pdo_connect->query('CREATE DATABASE IF NOT EXISTS Camagru;');
-    $pdo_connect->query('USE Camagru;');
-    $pdo_connect->query("CREATE TABLE IF NOT EXISTS user (
+    $pdo_connect->query('CREATE DATABASE IF NOT EXISTS camagru DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;');
+    $pdo_connect->query('USE camagru;');
+    $pdo_connect->query("CREATE TABLE IF NOT EXISTS users (
                   user_id int(11) NOT NULL AUTO_INCREMENT,
                   login varchar(100) NOT NULL,
                   password varchar(999) NOT NULL,
@@ -20,8 +20,9 @@ try {
                   is_admin BOOLEAN NOT NULL DEFAULT FALSE,
                   reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                   verified BOOLEAN DEFAULT FALSE,
-                  PRIMARY KEY (user_id)
-                  )COMMENT='User table';");
+                  PRIMARY KEY (user_id),
+                  UNIQUE (login)
+                  ) COMMENT='User table';");
     $pdo_connect->query("INSERT INTO user ( login, password, email, is_admin, verified )
                   VALUES ('admin', '".hash("whirlpool", "admin")."', 'opichou@student.42.fr', TRUE, TRUE);");
     $pdo_connect->query("CREATE TABLE IF NOT EXISTS photos (
@@ -31,17 +32,14 @@ try {
                   published BOOLEAN NOT NULL DEFAULT FALSE,
                   voided BOOLEAN NOT NULL DEFAULT FALSE,
                   photo_url varchar(500) NOT NULL,
-                  PRIMARY KEY (photo_id),
-                  FOREIGN KEY (user_id) REFERENCES user(user_id)
+                  PRIMARY KEY (photo_id)
                   ) COMMENT='Photo table';");
     $pdo_connect->query("CREATE TABLE IF NOT EXISTS likes (
                   like_id int(22) NOT NULL AUTO_INCREMENT,
                   user_id int(11) NOT NULL,
                   photo_id int(11) NOT NULL,
                   like_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                  PRIMARY KEY (like_id),
-                  FOREIGN KEY (user_id) REFERENCES user(user_id),
-                  FOREIGN KEY (photo_id) REFERENCES photos(photo_id)
+                  PRIMARY KEY (like_id)
                   ) COMMENT='Likes table';");
     $pdo_connect->query("CREATE TABLE IF NOT EXISTS tokens (
                   token_id int(11) NOT NULL AUTO_INCREMENT,
@@ -49,8 +47,7 @@ try {
                   token TEXT NOT NULL,
                   usag TEXT NOT NULL,
                   status BOOLEAN DEFAULT TRUE,
-                  PRIMARY KEY (token_id),
-                  FOREIGN KEY (user_id) REFERENCES user(user_id)
+                  PRIMARY KEY (token_id)
                   ) COMMENT='Likes table';");
     $pdo_connect = null;
 } catch (PDOException $e) {

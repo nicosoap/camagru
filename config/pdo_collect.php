@@ -2,12 +2,10 @@
 /**
  * Created by PhpStorm.
  * User: Olivier
- * Date: 02/07/2016
- * Time: 03:07
+ * Date: 7/8/2016
+ * Time: 8:54 AM
  */
 include_once("config/omni_connection.php");
-include_once("class/class.user.php");
 include_once("class/class.camagru.php");
-$user = new user($pdo_connect);
 $camagru = new camagru($pdo_connect);
 ?>

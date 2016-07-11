@@ -5,6 +5,8 @@
  * Date: 02/07/2016
  * Time: 02:36
  */
+include_once("config/pdo_connect.php");
+//include_once("config/pdo_collect.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,10 +23,5 @@
         <span id="title"><h1>CAMAGRU!!!</h1></span>
         <span class="img" ><a href="#"><img src="img/random-icon.png"/></a> </span>
         <span class="img" ><a href="#" ><img src="img/camera2-icon.png"/></a></span>
-        <span class="stick-right"><?php if (isset($_SESSION["loggued_in"]) && $_SESSION["loggued_in"] != "") {?>
-            <a href="login.php"><?php echo $_SESSION["name"]; ?></a> / <a href="signup.php">SIGN-OUT</a></span>
-        <?php } else {?>
-            <a href="signin.php">LOG-IN</a> / <a href="signup.php">SIGN-UP</a></span>
-        <?php } ?>
-
+        <span class="stick-right"><a href="logout.php">LOGOUT</a> </span>
     </div>

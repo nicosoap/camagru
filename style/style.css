@@ -14,6 +14,7 @@ body {
     color: white;
     margin: 0;
     height: 100%;
+    overflow-x: hidden;
 }
 .contener {
     width: 100%;
@@ -35,29 +36,39 @@ body {
         min-width: 320px;
         height: 15vh;
         float: left;
+        margin: 0;
     }
     .header .img{
-        height: 11vmin;
+        height: 13vmin;
         margin: 0.8vh 1vw 0.5vh;
     }
     .header img{
-        height: 11vmin;
+        height: 13vh;
     }
     .main {
         width: 100vw;
-        height: 50vh;
+        height: 66.25vw;
         float: left;
+        margin: 0;
     }
     .sidebar {
-        width: 100%;
-        height: 25vh;
+        width: 100vw;
+        height: 66.25vw;
         float: left;
+        margin: 0;
     }
     .footer {
         width: 100%;
-        height: 8vh;
+        height: 10vh;
         float: left;
         text-align: center;
+        margin: 0;
+    }
+    #canvas {
+        height: 56.25vw;
+    }
+    #videoElement {
+        height: 56.25vw;
     }
 }
 @media only screen and (min-device-width : 375px) and (max-device-width : 732px) and (orientation : landscape) {
@@ -69,7 +80,8 @@ body {
         min-width: 320px;
         float: left;
         line-height: 13vh;
-        height: 13vh;
+        height: 15vh;
+        margin: 0;
     }
     .header .img{
         height: 7vmin;
@@ -79,21 +91,30 @@ body {
         height: 7vmax;
     }
     .main {
-        width: 70%;
-        height: 80vh;
+        width: 80vw;
+        height: 55vw;
         float: left;
         padding: 0;
+        margin: 0;
     }
     .sidebar {
-        width: 30%;
-        height: 80vh;
+        width: 18vw;
+        height: 55vw;
         float: left;
+        margin:0;
     }
     .footer {
         width: 100%;
-        height: 7vh;
+        height: 10vh;
         float: left;
         text-align: center;
+        margin:0;
+    }
+    #canvas {
+        height: 45vw;
+    }
+    #videoElement {
+        height: 45vw;
     }
 }
 @media only screen and (min-device-width: 733px) {
@@ -103,7 +124,9 @@ body {
     .header {
         width: 100%;
         min-width: 320px;
+        height: 15vh;
         float: left;
+        margin: 0;
     }
     .header .img{
         height: 12vh;
@@ -113,18 +136,29 @@ body {
         height: 11vmin;
     }
     .main {
-        width: 70%;
-        height: 80%;
+        width: 80vw;
+        height: 55vw;
         float: left;
+        margin: 0;
     }
     .sidebar {
-        width: 30%;
+        width: 18vw;
         float: left;
+        height: 55vw;
+        margin: 0;
     }
     .footer {
         width: 100%;
+        height: 10vh;
         float: left;
         text-align: center;
+        margin: 0;
+    }
+    #canvas {
+        height: 45vw;
+    }
+    #videoElement {
+        height: 45vw;
     }
 }
 @media tv {
@@ -158,25 +192,12 @@ a:hover {
     display: inline-block;
     line-height: 100%;
 }
-#videoElement {
-    width: 100%;
-    height: 80%;
-    background-image: url("img/videobg.png");
-}
-#canvas {
-    visibility: hidden;
-}
-#snap {
-    width: 100%;
-    height: 20%;
-    font-size: 3.5vmax;
-}
 .centered {
     display: inline-block;
     float: left;
     width: 100vw;
 }
-.centered input {
+input {
     padding-left: 2vw;
     width: 100%;
     border: none;
@@ -186,19 +207,22 @@ a:hover {
     font-size: inherit;
     font-family: inherit;
  }
-.centered input:hover {
+input:hover {
     padding-left: 2vw;
     background-color: hotpink;
     border: none;
     border-top: 3vh solid darkgrey;
     color: white;
 }
-.centered input:focus {
+input:focus {
     padding-left: 2vw;
     background-color: hotpink;
     border: none;
     border-top: 3vh solid darkgrey;
     color: white;
+}
+a .form:hover {
+    background-color: hotpink;
 }
 .form {
     padding-left: 4vw;
@@ -211,4 +235,92 @@ a:hover {
     font-size: inherit;
     font-family: inherit;
     box-sizing: content-box;
+}
+.form .alert {
+    color: crimson;
+}
+.form .green {
+    color: aqua;
+}
+#videoFallback {
+    overflow: hidden;
+    width: 100%;
+}
+#videoElement {
+    width: 100%;
+}
+#canvas {
+    width: 100%;
+}
+#snap {
+    width: 100%;
+    height: 5vw;
+    font-size: 4vw;
+    line-height: 5vw;
+}
+
+.inputfile-1:focus + label,
+.inputfile-1.has-focus + label,
+.inputfile-1 + label:hover {
+    background-color: hotpink;
+    color: white;
+}
+
+.inputfile-1 + label {
+    color: darkgrey;
+    background-color: white;
+}
+
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.inputfile + label {
+    padding-left: 2vw;
+    width: 100%;
+    border: none;
+    border-top: 3vh solid darkgrey;
+    color: darkgrey;
+    background-color: white;
+    font-size: inherit;
+    font-family: inherit;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    padding: 0;
+    padding-left: 2vw;
+    /* 0.625rem 1.25rem 10px 20px */
+}
+
+.no-js .inputfile + label {
+    display: none;
+}
+
+.inputfile:focus + label,
+.inputfile.has-focus + label {
+    outline: 1px dotted #000;
+    outline: -webkit-focus-ring-color auto 5px;
+}
+
+.inputfile + label * {
+    /* pointer-events: none; */
+    /* in case of FastClick lib use */
+}
+
+.inputfile + label svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+    fill: currentColor;
+    margin-top: -0.25em;
+    /* 4px */
+    margin-right: 0.25em;
+    /* 4px */
 }
