@@ -258,7 +258,9 @@ a .form:hover {
     font-size: 4vw;
     line-height: 5vw;
 }
-
+.hidden {
+    display: none;
+}
 .inputfile-1:focus + label,
 .inputfile-1.has-focus + label,
 .inputfile-1 + label:hover {
@@ -323,4 +325,37 @@ a .form:hover {
     /* 4px */
     margin-right: 0.25em;
     /* 4px */
+}
+
+/* cama preview styling */
+
+#cama_model {
+    display: none;
+}
+
+.cama_preview {
+    width: 100%;
+    display: inline-block;
+    float: left;
+    padding: 0 0 15px 0;
+}
+
+.cama_preview img {
+    height: 100%;
+    overflow: hidden;
+}
+
+.cama_delete {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
+    line-height: 100%;
+}
+
+.cama_delete:hover {
+    cursor: hand;
+    background-color: rgba(255, 0, 0, 0.2);
 }

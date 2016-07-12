@@ -6,6 +6,7 @@
  * Time: 03:03
  */
 
+include_once("config/pdo_connect.php");
 include("header.php");
 if ($user->is_logged_in()){
     $user->redirect('home.php');

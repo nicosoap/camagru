@@ -5,8 +5,7 @@
  * Date: 02/07/2016
  * Time: 05:16
  */
-
-include("header.php");
+include_once("config/pdo_connect.php");
     if ($user->is_logged_in()!="") {
         $user->redirect("home.php");
     } else if (isset($_POST['submit'])) {
@@ -22,6 +21,7 @@ include("header.php");
             $error = "Try again !";
         }
     }
+include("header.php");
 ?>
 <div class="centered form-container">
 <form name="login" method="post" action="signin.php">

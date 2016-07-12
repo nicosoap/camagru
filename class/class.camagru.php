@@ -9,6 +9,7 @@
 class camagru
 {
     private $cama = null;
+    private $cama_id = null;
     private $user = null;
     private $user_id = null;
     private $db;
@@ -92,8 +93,8 @@ class camagru
         }
     }
 
-    public function getURL($photo_id) {
-        if (isset($photo_id) && $photo_id != ""){
+    public function getURL() {
+        /*if (isset($photo_id) && $photo_id != ""){
             try {
                 $stmt = $this->db->prepare("SELECT photo_url FROM photos WHERE photo_id = :photo_id");
                 $stmt->execute(array(':photo_id' => $photo_id));
@@ -103,10 +104,26 @@ class camagru
                 echo "Connection failed: ".$e->getMessage();
                 return (0);
             }
-        } elseif (isset($this->cama) && $this->cama != "") {
-            return ($this->cama);
+        } elseif (isset($this->cama) && $this->cama != "") {*/
+            return ($this->cama);/*
         } else {
             return 0;
+        }*/
+    }
+
+    public function getID() {
+        if (isset($this->cama_id) && $this->cama_id != "")
+            return $this->cama_id;
+        else if (isset($this->cama) && $this->cama != "") {
+            try {
+                $stmt = $this->db->prepare("SELECT photo_id FROM photos WHERE photo_url = :photo_url LIMIT 1");
+                $stmt->execute(array(":photo_url" => $this->cama));
+                $photo = $stmt->fetch();
+                $this->cama_id = $photo['photo_id'];
+                return $this->cama_id;
+            } catch (PDOException $e) {
+                echo "Connection failed:".$e->getMessage();
+            }
         }
     }
 

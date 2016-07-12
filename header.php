@@ -5,8 +5,6 @@
  * Date: 02/07/2016
  * Time: 02:36
  */
-include_once("config/pdo_connect.php");
-//include_once("config/pdo_collect.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
