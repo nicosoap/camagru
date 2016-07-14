@@ -25,8 +25,8 @@ class camagru
     }
 
     public function makeCama($image, $overlay, $login) {
-        //ini_set('error_reporting', E_ALL);
-        //ini_set('display_errors', true);
+        ini_set('error_reporting', E_ALL);
+        ini_set('display_errors', true);
         $this->user = $login;
         $image_info = getimagesize($image);
         if (($image_info != false) && (($image_info[0]/$image_info[1]) > 1.7) && (($image_info[0]/$image_info[1]) < 1.85) && ($image_info[0] <= 5120) && ($image_info[0] >= 155)){

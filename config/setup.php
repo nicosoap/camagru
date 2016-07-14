@@ -23,7 +23,7 @@ try {
                   PRIMARY KEY (user_id),
                   UNIQUE (login)
                   ) COMMENT='User table';");
-    $pdo_connect->query("INSERT INTO user ( login, password, email, is_admin, verified )
+    $pdo_connect->query("INSERT INTO users ( login, password, email, is_admin, verified )
                   VALUES ('admin', '".hash("whirlpool", "admin")."', 'opichou@student.42.fr', TRUE, TRUE);");
     $pdo_connect->query("CREATE TABLE IF NOT EXISTS photos (
                   photo_id int(11) NOT NULL AUTO_INCREMENT,

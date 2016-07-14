@@ -1,6 +1,22 @@
 /**
  * Created by Olivier on 7/5/2016.
  */
+
+function delete_cama(elem) {
+    var tmp_id = elem.parentNode.getAttribute('id');
+    console.log(tmp_id);
+    var ajax = new XMLHttpRequest();
+    ajax.open("GET", 'delete_camagru.php?id='+tmp_id, true);
+    ajax.onreadystatechange = function() {
+        console.log(ajax.responseText);
+        if (ajax.responseText == "1") {
+            sidebar.removeChild(tmp_id);
+        }
+    }
+    ajax.send();
+}
+
+
 window.onload = function(){
     var video = document.getElementById("videoElement");
     var canvas = document.getElementById('canvas');
@@ -8,6 +24,7 @@ window.onload = function(){
     var preview = document.getElementById('preview');
     var snap = document.getElementById('snap');
     var videoFallback = document.getElementById('videoFallback');
+    var fileuploadform = document.getElementById('fileuploadform');
     var isvalidfile = false;
     var sidebar = document.getElementById('sidebar');
     var cama_model = document.getElementById('cama_model');
@@ -21,10 +38,8 @@ window.onload = function(){
     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
 
     if (navigator.getUserMedia) {
-        navigator.getUserMedia({video: true, audio: false}, handleVideo, videoError);
+        navigator.getUserMedia({ audio: false, video: { width: 1280, height: 720 } }, handleVideo, videoError);
     }
-
-    snap.addEventListener('click', takepicture, false);
 
 
     function handleVideo(stream) {
@@ -71,16 +86,7 @@ window.onload = function(){
 
     }
 
-    function delete_cama(elem) {
-        var tmp_id = elem.parentNode.getAttribute('id');
-        var ajax = new XMLHttpRequest();
-        ajax.open("GET", 'delete_camagru.php?id='+tmp_id, true);
-        ajax.onreadystatechange = function() {
-            console.log(ajax.responseText);
-            sidebar.removeChild(tmp_id);
-        }
-        ajax.send();
-    }
+
 
     function publishphoto(elem){
         var tmp_id = elem.parentNode.getAttribute('id');
@@ -93,48 +99,44 @@ window.onload = function(){
     }
 
     function add_cama(cama) {
-        if (cama.url != "error") {
-            console.log(cama.url);
-            console.log(cama.id);
+        if (cama != "error") {
             var camagru = document.createElement("div");
             camagru.setAttribute('id', cama.id);
             if (sidebar) {
-                sidebar.appendChild(camagru);
                 camagru.classList.add("cama_preview");
                 camagru.innerHTML = cama_model.innerHTML;
                 var tmp_img = camagru.getElementsByTagName('img');
                 var tmp_input = camagru.getElementsByTagName('input');
-                tmp_img.setAttribute('src', cama.url);
-                tmp_input.setAttribute('name', "photo_id_"+cama_count);
-                tmp_input.setAttribute('value', cama.id);
+                tmp_img[0].src = cama.url;
+                tmp_input.name = "photo_id_"+cama_count;
+                tmp_input.value = cama.id;
+                sidebar.appendChild(camagru);
                 cama_count += 1;
-                console.log(cama_count);
+                return 1;
             } else {
                 console.log("error appending child");
+                return 0;
             }
 
         }
-    }
+    };
 
-    function takepicture() {
-        console.log("takepicture");
+    fileuploadform.addEventListener('submit', function(e) {
+        e.preventDefault();
         if (isnowebcam == true && isvalidfile == true) {
-            console.log("take picture from file upload");
-            console.log(file);
-            console.log(file.name);
+
             var ajax = new XMLHttpRequest();
-            var fileuploadform = document.getElementById('fileuploadform');
             var form_data = new FormData();
             form_data.append('userfile', file, file.name);
             ajax.open("POST",'make_camagru.php',true);
             ajax.onreadystatechange = function() {
                 if (ajax.readyState == 4 && ajax.status == 200) {
-                    console.log("returned value");
-                    console.log(ajax.responseText);
                     add_cama(JSON.parse(ajax.responseText));
+                    return 1;
                 }
             }
             ajax.send(form_data);
+            return 1;
         }
         else {
             console.log("takepicture from webcam");
@@ -142,10 +144,30 @@ window.onload = function(){
             var context = canvas.getContext('2d');
             canvas.width = 1280;
             canvas.height = 720;
-            context.drawImage(video, 0, 0, width, height);
+            context.drawImage(video, 0, 0, 1280, 720);
+            var tmp_img = new Image();
+            var d = new Date();
             var data = canvas.toDataURL('image/png');
+            tmp_img.src = data;
+            tmp_img.name = d.getDate();
             canvas.classList.add('hidden');
+            var ajax = new XMLHttpRequest();
+            var form_data = new FormData();
+            form_data.append('userfile', data);
+            form_data.append('webcam', "1");
+
+
+
+            ajax.open("POST",'make_camagru.php',true);
+            ajax.onreadystatechange = function() {
+                if (ajax.readyState == 4 && ajax.status == 200) {
+                    add_cama(JSON.parse(ajax.responseText));
+                    return 1;
+                }
+            }
+            ajax.send(form_data);
+            return 1;
         }
 
-    };
+    }, false);
 };

@@ -54,7 +54,7 @@ body {
     .sidebar {
         width: 100vw;
         height: 66.25vw;
-        float: left;
+        float: right;
         margin: 0;
     }
     .footer {
@@ -100,7 +100,7 @@ body {
     .sidebar {
         width: 18vw;
         height: 55vw;
-        float: left;
+        float: right;
         margin:0;
     }
     .footer {
@@ -143,7 +143,7 @@ body {
     }
     .sidebar {
         width: 18vw;
-        float: left;
+        float: right;
         height: 55vw;
         margin: 0;
     }
@@ -334,23 +334,29 @@ a .form:hover {
 }
 
 .cama_preview {
+    margin: 0 0;
     width: 100%;
     display: inline-block;
-    float: left;
+    float: right;
     padding: 0 0 15px 0;
 }
 
 .cama_preview img {
     height: 100%;
     overflow: hidden;
+    z-index: 5;
+}
+
+.cama_img {
+    z-index: 5;
 }
 
 .cama_delete {
+    position: relative;
+    top: -10vw;
     width: 100%;
     height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
+    z-index: 99;
     text-align: center;
     line-height: 100%;
 }
