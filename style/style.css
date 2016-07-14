@@ -365,3 +365,18 @@ a .form:hover {
     cursor: hand;
     background-color: rgba(255, 0, 0, 0.2);
 }
+
+.cama_like {
+    position: relative;
+    top: -10vw;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    text-align: center;
+    line-height: 100%;
+}
+
+.cama_like:hover {
+    cursor: hand;
+    background-color: rgba(255, 105, 180, 0.2);
+}

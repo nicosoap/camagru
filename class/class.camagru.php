@@ -68,8 +68,14 @@ class camagru
         try {
             $stmt = $this->db->prepare("INSERT INTO likes (user_id, photo_id) VALUES (:user_id, :photo_id)");
             $stmt->execute(array(":user_id" => $user_id, ":photo_id" => $photo_id));
+            if ($stmt->rowCount() == 1) {
+                return 1;
+            } else {
+                return 0;
+            }
         } catch (PDOException $e) {
             echo 'Connection failed: ' . $e->getMessage();
+            return 0;
         }
     }
 
@@ -158,12 +164,32 @@ class camagru
     public function getMyPhotos($user_id) {
         if (isset($user_id) && $user_id != "") {
             try {
-                $stmt = $this->db->prepare("SELECT photo_id, photo_url FROM photos WHERE user_id=:user_id AND voided=0 ORDER BY photo_id DESC");
+                $stmt = $this->db->prepare("SELECT photo_id AS id, photo_url AS url FROM photos WHERE user_id=:user_id AND voided=0 ORDER BY photo_id DESC");
                 $stmt->execute(array(':user_id' => $user_id));
+                return $stmt->fetchAll();
             } catch (PDOException $e) {
                 echo "Connection failed: ".$e->getMessage();
+                return 0;
             }
         }
+    }
+
+    public function getAllPhotos($user_id, $page) {
+        if (isset($user_id) && ($user_id != "") && ($page >= 0)) {
+            try {
+                $stmt = $this->db->prepare("( SELECT photos.photo_id AS `id`, photos.photo_url AS `url`, photos.user_id AS `user_id`, COUNT(likes.like_date) AS `likes` 
+                FROM photos LEFT JOIN likes ON photos.photo_id = likes.photo_id WHERE photos.voided = '0' AND photos.published = '1' GROUP BY `id` ) 
+                UNION ALL ( SELECT photos.photo_id AS `id`, photos.photo_url AS `url`, photos.user_id AS `user_id`, COUNT(likes.like_date) AS `likes` 
+                FROM photos RIGHT JOIN likes ON photos.photo_id = likes.photo_id 
+                WHERE photos.voided = '0' AND photos.published = '1' GROUP BY `id` ) ORDER BY id DESC LIMIT :offset, 25;");
+                $stmt->bindParam(':offset', intval(($page - 1) * 25), PDO::PARAM_INT);
+                $stmt->execute();
+                return $stmt->fetchAll();
+            } catch (PDOException $e) {
+                echo "Connection failed: ".$e->getMessage();
+                return 0;
+            }
+        } else { return 0; }
     }
 
 }

@@ -133,7 +133,7 @@ class user
     {
         if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] != "") {
             return true;
-        }
+        } else { return false; }
     }
 
     public function redirect($url)

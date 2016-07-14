@@ -1,6 +1,12 @@
 <div class="main">
     <form id="fileuploadform" method="post" enctype="multipart/form-data">
     <video autoplay id="videoElement"></video>
+        <div class="cama_mask"><img id="overlayer"/></div>
+        <div>
+            <div class="change less" id="cama_less"></div>
+            <div class="button_snap" id="cama_snap"></div>
+            <div class="change more" id="cama_more"></div>
+        </div>
     <canvas id="canvas" class="hidden" width="1280" height="720"></canvas>
         <div id="videoFallback" class="hidden">
             <img id="preview" class="hidden" width="1280" height="720" />

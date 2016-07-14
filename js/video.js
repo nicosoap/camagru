@@ -4,13 +4,12 @@
 
 function delete_cama(elem) {
     var tmp_id = elem.parentNode.getAttribute('id');
-    console.log(tmp_id);
     var ajax = new XMLHttpRequest();
     ajax.open("GET", 'delete_camagru.php?id='+tmp_id, true);
     ajax.onreadystatechange = function() {
         console.log(ajax.responseText);
         if (ajax.responseText == "1") {
-            sidebar.removeChild(tmp_id);
+            elem.parentNode.remove();
         }
     }
     ajax.send();
@@ -18,6 +17,7 @@ function delete_cama(elem) {
 
 
 window.onload = function(){
+    var sidebar = document.getElementById('sidebar');
     var video = document.getElementById("videoElement");
     var canvas = document.getElementById('canvas');
     var user_file = document.getElementById('file');
@@ -35,6 +35,7 @@ window.onload = function(){
     var width = 1280;
     var height = 720;
     var allowedTypes = ['jpg', 'jpeg', 'gif', 'png'];
+    var overlayer = ['img/overlay/01.png', 'img/overlay/02.png', 'img/overlay/03.png', 'img/overlay/04.png', 'img/overlay/05.png', 'img/overlay/06.png', ];
     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
 
     if (navigator.getUserMedia) {
@@ -72,22 +73,6 @@ window.onload = function(){
         }, false);
     }
 
-    function saveImage() {
-        var canvasData = canvas.toDataURL("image/png");
-        var ajax = new XMLHttpRequest();
-        ajax.open("POST",'testSave.php',false);
-        ajax.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                console.log(ajax.responseText);
-            }
-        };
-        ajax.setRequestHeader('Content-Type', 'application/upload');
-        ajax.send("imgData="+canvasData);
-
-    }
-
-
-
     function publishphoto(elem){
         var tmp_id = elem.parentNode.getAttribute('id');
         var ajax = new XMLHttpRequest();
@@ -99,7 +84,7 @@ window.onload = function(){
     }
 
     function add_cama(cama) {
-        if (cama != "error") {
+        if (cama && cama.url && cama.id && (cama != "error")) {
             var camagru = document.createElement("div");
             camagru.setAttribute('id', cama.id);
             if (sidebar) {
@@ -124,10 +109,10 @@ window.onload = function(){
     fileuploadform.addEventListener('submit', function(e) {
         e.preventDefault();
         if (isnowebcam == true && isvalidfile == true) {
-
             var ajax = new XMLHttpRequest();
             var form_data = new FormData();
             form_data.append('userfile', file, file.name);
+            form_data.append('overlayer', overlayer[overlay]);
             ajax.open("POST",'make_camagru.php',true);
             ajax.onreadystatechange = function() {
                 if (ajax.readyState == 4 && ajax.status == 200) {
@@ -155,19 +140,37 @@ window.onload = function(){
             var form_data = new FormData();
             form_data.append('userfile', data);
             form_data.append('webcam', "1");
-
-
-
+            form_data.append('overlayer', overlayer[overlay]);
             ajax.open("POST",'make_camagru.php',true);
             ajax.onreadystatechange = function() {
                 if (ajax.readyState == 4 && ajax.status == 200) {
                     add_cama(JSON.parse(ajax.responseText));
                     return 1;
                 }
-            }
+            };
             ajax.send(form_data);
             return 1;
         }
 
     }, false);
+
+    function pageload(){
+        var ajax = new XMLHttpRequest();
+        var form_data = new FormData();
+        form_data.append('perso', '1');
+        ajax.open('POST', 'load_photos.php', true);
+        ajax.onreadystatechange = function() {
+            if (ajax.readyState == 4 && ajax.status == 200) {
+                if (ajax.responseText != "" && ajax.responseText != "error") {
+                    var dataset = JSON.parse(ajax.responseText);
+                    dataset.forEach(function (current) {
+                        add_cama(current);
+                    });
+                }
+            }
+        };
+        ajax.send(form_data);
+        return 1;
+    }
+    pageload();
 };

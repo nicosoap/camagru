@@ -29,7 +29,7 @@ try {
                   photo_id int(11) NOT NULL AUTO_INCREMENT,
                   user_id int(11) NOT NULL,
                   creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                  published BOOLEAN NOT NULL DEFAULT FALSE,
+                  published BOOLEAN NOT NULL DEFAULT TRUE,
                   voided BOOLEAN NOT NULL DEFAULT FALSE,
                   photo_url varchar(500) NOT NULL,
                   PRIMARY KEY (photo_id)
