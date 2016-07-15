@@ -29,7 +29,7 @@ class camagru
         ini_set('display_errors', true);
         $this->user = $login;
         $image_info = getimagesize($image);
-        if (($image_info != false) && (($image_info[0]/$image_info[1]) > 1.7) && (($image_info[0]/$image_info[1]) < 1.85) && ($image_info[0] <= 5120) && ($image_info[0] >= 155)){
+        if (($image_info != false) && (($image_info[0]/$image_info[1]) > 1.25) && (($image_info[0]/$image_info[1]) < 1.48) && ($image_info[0] <= 5120) && ($image_info[0] >= 155)){
             switch ($image_info['mime']) {
                 case 'image/gif': $camatmp = imagecreatefromgif($image); break;
                 case 'image/jpeg': $camatmp = imagecreatefromjpeg($image); break;
@@ -37,7 +37,7 @@ class camagru
                 default: echo "file error" ; exit; break;
             };
             $camatmp =
-            $camatmp = imageaffine($camatmp, [1280/$image_info[0], 0, 0, 720/$image_info[1], 0, 0]);
+            $camatmp = imageaffine($camatmp, [1024/$image_info[0], 0, 0, 768/$image_info[1], 0, 0]);
             if ($camatmp != FALSE) {
             }
             $overlayer = imagecreatefrompng($overlay);
@@ -100,21 +100,7 @@ class camagru
     }
 
     public function getURL() {
-        /*if (isset($photo_id) && $photo_id != ""){
-            try {
-                $stmt = $this->db->prepare("SELECT photo_url FROM photos WHERE photo_id = :photo_id");
-                $stmt->execute(array(':photo_id' => $photo_id));
-                $photo = $stmt->fetch(PDO::FETCH_ASSOC);
-                return $photo['photo_url'];
-            } catch (PDOException $e) {
-                echo "Connection failed: ".$e->getMessage();
-                return (0);
-            }
-        } elseif (isset($this->cama) && $this->cama != "") {*/
-            return ($this->cama);/*
-        } else {
-            return 0;
-        }*/
+            return ($this->cama);
     }
 
     public function getID() {

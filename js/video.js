@@ -22,7 +22,6 @@ window.onload = function(){
     var canvas = document.getElementById('canvas');
     var user_file = document.getElementById('file');
     var preview = document.getElementById('preview');
-    var snap = document.getElementById('snap');
     var videoFallback = document.getElementById('videoFallback');
     var fileuploadform = document.getElementById('fileuploadform');
     var isvalidfile = false;
@@ -32,16 +31,31 @@ window.onload = function(){
     var file;
     var isnowebcam;
     startbutton = document.getElementById('startbutton');
-    var width = 1280;
-    var height = 720;
+    var width = 1024;
+    var height = 768;
+    var overlayer_div = document.getElementById('overlayer').getElementsByTagName('img')[0];
+    var more = document.getElementById('cama_more');
+    var less = document.getElementById('cama_less');
+    var snap = document.getElementById('cama_snap');
     var allowedTypes = ['jpg', 'jpeg', 'gif', 'png'];
     var overlayer = ['img/overlay/01.png', 'img/overlay/02.png', 'img/overlay/03.png', 'img/overlay/04.png', 'img/overlay/05.png', 'img/overlay/06.png', ];
     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
 
     if (navigator.getUserMedia) {
-        navigator.getUserMedia({ audio: false, video: { width: 1280, height: 720 } }, handleVideo, videoError);
+        navigator.getUserMedia({ audio: false, video: { width: width, height: height } }, handleVideo, videoError);
     }
 
+    more.addEventListener('click', changeOverlayer('more', overlayer_div.src));
+    less.addEventListener('click', changeOverlayer('less', overlayer_div.src));
+    snap.addEventListener('click', fileuploadform.submit());
+
+    function changeOverlayer(way, actual) {
+        if (way == 'more') {
+            overlayer_div.src = overlayer[(overlayer.indexOf(actual) + 1) % 6];
+        }else {
+            overlayer_div.src = overlayer[(overlayer.indexOf(actual) + 5) % 6];
+        }
+    }
 
     function handleVideo(stream) {
         console.log("handleVideo");
@@ -63,8 +77,6 @@ window.onload = function(){
                 file = e.target.files[0];
                 var reader = new FileReader();
                 reader.addEventListener('load', function (e) {
-                    //var tmp;
-                    //tmp.img = reader.result;
                     preview.classList.remove('hidden');
                     preview.src = reader.result;
                 }, false);
@@ -127,8 +139,8 @@ window.onload = function(){
             console.log("takepicture from webcam");
             canvas.classList.remove('hidden');
             var context = canvas.getContext('2d');
-            canvas.width = 1280;
-            canvas.height = 720;
+            canvas.width = width;
+            canvas.height = height;
             context.drawImage(video, 0, 0, 1280, 720);
             var tmp_img = new Image();
             var d = new Date();
