@@ -27,7 +27,7 @@ class camagru
     public function makeCama($image, $overlay, $login) {
         ini_set('error_reporting', E_ALL);
         ini_set('display_errors', true);
-        $this->user = $login;
+        $this->user = $this->db->quote($login);
         $image_info = getimagesize($image);
         if (($image_info != false) && (($image_info[0]/$image_info[1]) > 1.25) && (($image_info[0]/$image_info[1]) < 1.48) && ($image_info[0] <= 5120) && ($image_info[0] >= 155)){
             switch ($image_info['mime']) {
@@ -67,7 +67,9 @@ class camagru
     public function likePhoto($user_id, $photo_id) {
         try {
             $stmt = $this->db->prepare("INSERT INTO likes (user_id, photo_id) VALUES (:user_id, :photo_id)");
-            $stmt->execute(array(":user_id" => $user_id, ":photo_id" => $photo_id));
+            $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
+            $stmt->bindParam(":photo_id", $photo_id, PDO::PARAM_INT);
+            $stmt->execute();
             if ($stmt->rowCount() == 1) {
                 return 1;
             } else {
@@ -82,7 +84,8 @@ class camagru
     public function getLikes($photo_id) {
         try {
             $stmt = $this->db->prepare("SELECT * FROM likes WHERE photo_id =:photo_id");
-            $stmt->execute(array(":photo_id" => $photo_id));
+            $stmt->bindParam(":photo_id", $photo_id, PDO::PARAM_INT);
+            $stmt->execute();
             return $stmt->rowCount();
         } catch (PDOException $e) {
             echo "Connection failed :" . $e->getMessages();
@@ -92,7 +95,8 @@ class camagru
     public function getDetailedLikes($photo_id) {
         try {
             $stmt = $this->db->prepare("SELECT users.login FROM likes LEFT JOIN users ON likes.user_id = users.user_id WHERE likes.photo_id =:photo_id");
-            $stmt->execute(array(":photo_id" => $photo_id));
+            $stmt->bindParam(":photo_id", $photo_id, PDO::PARAM_INT);
+            $stmt->execute();
             return $stmt->fetchAll();
         } catch (PDOException $e) {
             echo "Connection failed : $e->getMessage()";
@@ -178,4 +182,7 @@ class camagru
         } else { return 0; }
     }
 
+    public function quote($str) {
+        return $this->db->quote($str);
+    }
 }

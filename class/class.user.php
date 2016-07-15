@@ -35,9 +35,9 @@ class user
         }
         try {
             $stmt = $this->db->prepare("INSERT INTO users(login, email, password, verified) VALUES(:username, :email, :password, :verif)");
-            $stmt->bindparam(":username", $username, PDO::PARAM_STR);
-            $stmt->bindparam(":password", $password, PDO::PARAM_STR);
-            $stmt->bindparam(":email", $email, PDO::PARAM_STR);
+            $stmt->bindparam(":username", $this->db->quote($username), PDO::PARAM_STR);
+            $stmt->bindparam(":password", $this->db->quote($password), PDO::PARAM_STR);
+            $stmt->bindparam(":email", $this->db->quote($email), PDO::PARAM_STR);
             $stmt->bindparam(":verif", $verif, PDO::PARAM_BOOL);
             $stmt->execute();
         return $stmt;
@@ -49,7 +49,7 @@ class user
     public function login($username, $userpasswd, $save) {
         try {
             $stmt = $this->db->prepare("SELECT * FROM users WHERE login=:username OR email=:useremail LIMIT 1");
-            $stmt->execute(array(':username' => $username, ':useremail' => $username));
+            $stmt->execute(array(':username' => $this->db->quote($username), ':useremail' => $this->db->quote($username)));
             $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
             if ($stmt->rowCount() > 0) {
                 if (hash("whirlpool", $userpasswd) === $userRow['password'] && ($userRow['verified'])) {
@@ -74,7 +74,7 @@ class user
     public function is_verified($username, $password) {
         try {
             $stmt = $this->db->prepare("SELECT * FROM users WHERE login=:username OR email=:useremail LIMIT 1");
-            $stmt->execute(array(':username' => $username, ':useremail' => $username));
+            $stmt->execute(array(':username' => $this->db->quote($username), ':useremail' => $this->db->quote($username)));
             $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
             if ($stmt->rowCount() > 0) {
                 if (hash("whirlpool", $password) === $userRow['password']) {
@@ -95,7 +95,7 @@ class user
         try {
             $token = md5($email.time());
             $stmt = $this->db->prepare("INSERT INTO tokens(user_id, usag, token) SELECT user_id, 'passwd', :token FROM users WHERE email =:email LIMIT 1");
-            $stmt->execute(array(':email'=>$email, ':token' => $token));
+            $stmt->execute(array(':email'=> $this->db->quote($email), ':token' => $this->db->quote($token)));
             $email_headers = "From: contact@liveoption.io\r\n";
             $email_headers .= "MIME-Version: 1.0\r\n";
             $email_headers .= "Content-type: text/html; charset=ISO-8859-1\r\n";
@@ -123,7 +123,7 @@ class user
     public function change_password($password, $token) {
         try {
             $stmt = $this->db->prepare("UPDATE users RIGHT JOIN tokens ON users.user_id=tokens.user_id SET users.password=:passwd, tokens.status='0' WHERE tokens.usag='passwd' AND tokens.token=:token");
-            $stmt->execute(array(':passwd' => $password, ':token' => $token));
+            $stmt->execute(array(':passwd' => $this->db->quote($password), ':token' => $this->db->quote($token)));
         }
         catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
@@ -146,5 +146,9 @@ class user
         session_destroy();
         unset($_SESSION['logged_in']);
         return true;
+    }
+
+    public function quote($str) {
+        return $this->db->quote($str);
     }
 }
