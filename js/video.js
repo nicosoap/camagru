@@ -33,21 +33,25 @@ window.onload = function(){
     startbutton = document.getElementById('startbutton');
     var width = 1024;
     var height = 768;
-    var overlayer_div = document.getElementById('overlayer').getElementsByTagName('img')[0];
+    var overlayer_div = document.getElementById('overlayer');
     var more = document.getElementById('cama_more');
     var less = document.getElementById('cama_less');
     var snap = document.getElementById('cama_snap');
     var allowedTypes = ['jpg', 'jpeg', 'gif', 'png'];
-    var overlayer = ['img/overlay/01.png', 'img/overlay/02.png', 'img/overlay/03.png', 'img/overlay/04.png', 'img/overlay/05.png', 'img/overlay/06.png', ];
+    var overlayer = ['img/overlayers/01.png', 'img/overlayers/02.png', 'img/overlayers/03.png', 'img/overlayers/04.png', 'img/overlayers/05.png', 'img/overlayers/06.png' ];
     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
 
     if (navigator.getUserMedia) {
         navigator.getUserMedia({ audio: false, video: { width: width, height: height } }, handleVideo, videoError);
     }
 
-    more.addEventListener('click', changeOverlayer('more', overlayer_div.src));
-    less.addEventListener('click', changeOverlayer('less', overlayer_div.src));
-    snap.addEventListener('click', fileuploadform.submit());
+    more.addEventListener('click', function(){
+        changeOverlayer('more', overlayer_div.src)
+    });
+    less.addEventListener('click', function(){
+        changeOverlayer('less', overlayer_div.src)
+    });
+    snap.addEventListener('click', take_photo);
 
     function changeOverlayer(way, actual) {
         if (way == 'more') {
@@ -118,20 +122,20 @@ window.onload = function(){
         }
     };
 
-    fileuploadform.addEventListener('submit', function(e) {
-        e.preventDefault();
+    function take_photo() {
         if (isnowebcam == true && isvalidfile == true) {
             var ajax = new XMLHttpRequest();
             var form_data = new FormData();
             form_data.append('userfile', file, file.name);
-            form_data.append('overlayer', overlayer[overlay]);
+            form_data.append('overlayer', overlayer_div.src);
+            console.log(overlayer_div.src);
             ajax.open("POST",'make_camagru.php',true);
             ajax.onreadystatechange = function() {
                 if (ajax.readyState == 4 && ajax.status == 200) {
                     add_cama(JSON.parse(ajax.responseText));
                     return 1;
                 }
-            }
+            };
             ajax.send(form_data);
             return 1;
         }
@@ -152,10 +156,12 @@ window.onload = function(){
             var form_data = new FormData();
             form_data.append('userfile', data);
             form_data.append('webcam', "1");
-            form_data.append('overlayer', overlayer[overlay]);
+            form_data.append('overlayer', overlayer_div.src);
+            console.log(overlayer_div.src);
             ajax.open("POST",'make_camagru.php',true);
             ajax.onreadystatechange = function() {
                 if (ajax.readyState == 4 && ajax.status == 200) {
+                    console.log(ajax.responseText);
                     add_cama(JSON.parse(ajax.responseText));
                     return 1;
                 }
@@ -164,15 +170,17 @@ window.onload = function(){
             return 1;
         }
 
-    }, false);
+    };
 
     function pageload(){
+        overlayer_div.src = overlayer[0];
         var ajax = new XMLHttpRequest();
         var form_data = new FormData();
         form_data.append('perso', '1');
         ajax.open('POST', 'load_photos.php', true);
         ajax.onreadystatechange = function() {
             if (ajax.readyState == 4 && ajax.status == 200) {
+                console.log(ajax.responseText);
                 if (ajax.responseText != "" && ajax.responseText != "error") {
                     var dataset = JSON.parse(ajax.responseText);
                     dataset.forEach(function (current) {

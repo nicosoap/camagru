@@ -21,7 +21,7 @@ include_once("config/pdo_connect.php");
             $error = "Try again !";
         }
     }
-include("header.php");
+include_once("header.php");
 ?>
 <div class="centered form-container">
 <form name="login" method="post" action="signin.php">

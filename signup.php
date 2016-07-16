@@ -7,7 +7,6 @@
  */
 
 include_once("config/pdo_connect.php");
-include("header.php");
 if ($user->is_logged_in()){
     $user->redirect('home.php');
 }
@@ -61,7 +60,9 @@ if (isset($_POST["submit"]) && $_POST['submit'] == 'SUBMIT!') {
             $user->redirect("signup.php?joined");
         }
     }
-} ?>
+}
+include("header.php");
+?>
         <div class="centered">
             <form title="subscribe to Camagru!!!"
                   about="fill this form to subscribe to Camagru!!! and start pimping your selfies" name="signup"

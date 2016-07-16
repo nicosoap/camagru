@@ -27,9 +27,9 @@ class camagru
     public function makeCama($image, $overlay, $login) {
         ini_set('error_reporting', E_ALL);
         ini_set('display_errors', true);
-        $this->user = $this->db->quote($login);
+        $this->user = $login;
         $image_info = getimagesize($image);
-        if (($image_info != false) && (($image_info[0]/$image_info[1]) > 1.25) && (($image_info[0]/$image_info[1]) < 1.48) && ($image_info[0] <= 5120) && ($image_info[0] >= 155)){
+        if (($image_info != false) /*&& (($image_info[0]/$image_info[1]) > 1.25) && (($image_info[0]/$image_info[1]) < 1.48) && ($image_info[0] <= 5120) && ($image_info[0] >= 155)*/){
             switch ($image_info['mime']) {
                 case 'image/gif': $camatmp = imagecreatefromgif($image); break;
                 case 'image/jpeg': $camatmp = imagecreatefromjpeg($image); break;
@@ -182,7 +182,4 @@ class camagru
         } else { return 0; }
     }
 
-    public function quote($str) {
-        return $this->db->quote($str);
-    }
 }
