@@ -21,25 +21,38 @@
     <favorites_list name="camagru" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.50348127">
+    <splitter split-orientation="horizontal" split-proportion="0.4007833">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="class.camagru.php" pinned="false" current-in-tab="false">
+          <file leaf-file-name="make_camagru.php" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/make_camagru.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="390">
+                  <caret line="26" column="41" selection-start-line="26" selection-start-column="41" selection-end-line="26" selection-end-column="41" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="class.camagru.php" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/class/class.camagru.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="371">
-                  <caret line="31" column="181" selection-start-line="31" selection-start-column="181" selection-end-line="31" selection-end-column="181" />
+                <state relative-caret-position="659">
+                  <caret line="72" column="36" selection-start-line="72" selection-start-column="36" selection-end-line="72" selection-end-column="36" />
                   <folding>
-                    <marker date="1468685817142" expanded="true" signature="621:630" ph="..." />
-                    <marker date="1468685817142" expanded="true" signature="2070:2160" ph="INSERT INTO photos... " />
-                    <marker date="1468685817142" expanded="true" signature="2109:2160" ph="SELECT user_... users" />
-                    <marker date="1468685817142" expanded="true" signature="2611:2677" ph="INSERT INTO likes... " />
-                    <marker date="1468685817142" expanded="true" signature="3208:3253" ph="SELECT * FRO... likes" />
-                    <marker date="1468685817142" expanded="true" signature="3612:3722" ph="SELECT users... likes" />
-                    <marker date="1468685817142" expanded="true" signature="4292:4356" ph="SELECT photo... photos" />
-                    <marker date="1468685817142" expanded="true" signature="4802:4877" ph="UPDATE photo... " />
-                    <marker date="1468685817142" expanded="true" signature="5314:5386" ph="UPDATE photo... " />
-                    <marker date="1468685817142" expanded="true" signature="5871:5981" ph="SELECT photo... photos" />
+                    <marker date="1468695667073" expanded="true" signature="621:630" ph="..." />
+                    <marker date="1468695667073" expanded="true" signature="2070:2160" ph="INSERT INTO photos... " />
+                    <marker date="1468695667073" expanded="true" signature="2109:2160" ph="SELECT user_... users" />
+                    <marker date="1468695667073" expanded="true" signature="2612:2679" ph="SELECT * FRO... likes" />
+                    <marker date="1468695667073" expanded="true" signature="2935:3001" ph="INSERT INTO likes... " />
+                    <marker date="1468695667073" expanded="true" signature="3788:3833" ph="SELECT * FRO... likes" />
+                    <marker date="1468695667073" expanded="true" signature="4192:4302" ph="SELECT users... likes" />
+                    <marker date="1468695667073" expanded="true" signature="4872:4936" ph="SELECT photo... photos" />
+                    <marker date="1468695667073" expanded="true" signature="5382:5457" ph="UPDATE photo... " />
+                    <marker date="1468695667073" expanded="true" signature="5894:5966" ph="UPDATE photo... " />
+                    <marker date="1468695667073" expanded="true" signature="6451:6561" ph="SELECT photo... photos" />
+                    <marker date="1468695667073" expanded="true" signature="7009:7336" ph="SELECT photo... photos" />
+                    <marker date="1468695667073" expanded="true" signature="7139:7210" ph="SELECT photo... likes" />
                   </folding>
                 </state>
               </provider>
@@ -96,21 +109,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="video.js" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/js/video.js">
+          <file leaf-file-name="load_photos.php" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/load_photos.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="692">
-                  <caret line="158" column="61" selection-start-line="158" selection-start-column="61" selection-end-line="158" selection-end-column="61" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="make_camagru.php" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/make_camagru.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="210">
-                  <caret line="14" column="76" selection-start-line="14" selection-start-column="76" selection-end-line="14" selection-end-column="76" />
+                <state relative-caret-position="165">
+                  <caret line="11" column="57" selection-start-line="11" selection-start-column="57" selection-end-line="11" selection-end-column="57" />
                   <folding />
                 </state>
               </provider>
@@ -119,18 +122,18 @@
           <file leaf-file-name="video.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/video.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="45">
-                  <caret line="3" column="20" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="29" />
+                <state relative-caret-position="120">
+                  <caret line="8" column="35" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="header.php" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/header.php">
+          <file leaf-file-name="video.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/js/video.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="240">
-                  <caret line="21" column="47" selection-start-line="21" selection-start-column="47" selection-end-line="21" selection-end-column="47" />
+                <state relative-caret-position="846">
+                  <caret line="164" column="63" selection-start-line="164" selection-start-column="15" selection-end-line="164" selection-end-column="63" />
                   <folding />
                 </state>
               </provider>
@@ -140,11 +143,41 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="style.css" pinned="false" current-in-tab="true">
+          <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/style/style.css">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1311">
-                  <caret line="381" column="1" selection-start-line="381" selection-start-column="1" selection-end-line="381" selection-end-column="1" />
+                <state relative-caret-position="1224">
+                  <caret line="376" column="0" selection-start-line="376" selection-start-column="0" selection-end-line="376" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="gallery.php" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/gallery.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="165">
+                  <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="image_gal.php" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/image_gal.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="150">
+                  <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="gallery.js" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/js/gallery.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="994">
+                  <caret line="80" column="47" selection-start-line="80" selection-start-column="47" selection-end-line="80" selection-end-column="47" />
                   <folding />
                 </state>
               </provider>
@@ -210,20 +243,20 @@
         <option value="$PROJECT_DIR$/home.php" />
         <option value="$PROJECT_DIR$/galery.php" />
         <option value="$PROJECT_DIR$/like_camagru.php" />
-        <option value="$PROJECT_DIR$/style/style.css" />
-        <option value="$PROJECT_DIR$/image_gal.php" />
-        <option value="$PROJECT_DIR$/js/gallery.js" />
         <option value="$PROJECT_DIR$/header.php" />
-        <option value="$PROJECT_DIR$/make_camagru.php" />
-        <option value="$PROJECT_DIR$/video.php" />
         <option value="$PROJECT_DIR$/config/setup.php" />
         <option value="$PROJECT_DIR$/config/mail.php" />
         <option value="$PROJECT_DIR$/forgot.php" />
         <option value="$PROJECT_DIR$/signin.php" />
         <option value="$PROJECT_DIR$/signup.php" />
         <option value="$PROJECT_DIR$/class/class.user.php" />
-        <option value="$PROJECT_DIR$/class/class.camagru.php" />
+        <option value="$PROJECT_DIR$/make_camagru.php" />
         <option value="$PROJECT_DIR$/js/video.js" />
+        <option value="$PROJECT_DIR$/video.php" />
+        <option value="$PROJECT_DIR$/image_gal.php" />
+        <option value="$PROJECT_DIR$/style/style.css" />
+        <option value="$PROJECT_DIR$/js/gallery.js" />
+        <option value="$PROJECT_DIR$/class/class.camagru.php" />
       </list>
     </option>
   </component>
@@ -290,6 +323,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="camagru" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="camagru" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="camagru" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -443,12 +490,12 @@
       <workItem from="1468592105116" duration="1307000" />
       <workItem from="1468673356290" duration="724000" />
       <workItem from="1468674759915" duration="1762000" />
-      <workItem from="1468680664508" duration="1968000" />
+      <workItem from="1468680664508" duration="7653000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="221193000" />
+    <option name="totallyTimeSpent" value="226878000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
@@ -666,38 +713,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/gallery.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="900">
-          <caret line="62" column="66" selection-start-line="62" selection-start-column="66" selection-end-line="62" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/like_camagru.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="12" column="15" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/load_photos.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="9" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gallery.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/image_gal.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="51" selection-start-line="12" selection-start-column="47" selection-end-line="12" selection-end-column="51" />
         </state>
       </provider>
     </entry>
@@ -766,54 +785,89 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/style/style.css">
+    <entry file="file://$PROJECT_DIR$/load_photos.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1311">
-          <caret line="381" column="1" selection-start-line="381" selection-start-column="1" selection-end-line="381" selection-end-column="1" />
+        <state relative-caret-position="165">
+          <caret line="11" column="57" selection-start-line="11" selection-start-column="57" selection-end-line="11" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/make_camagru.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="41" selection-start-line="26" selection-start-column="41" selection-end-line="26" selection-end-column="41" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/video.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="20" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="29" />
+        <state relative-caret-position="120">
+          <caret line="8" column="35" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/class/class.camagru.php">
+    <entry file="file://$PROJECT_DIR$/gallery.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="31" column="181" selection-start-line="31" selection-start-column="181" selection-end-line="31" selection-end-column="181" />
-          <folding>
-            <marker date="1468685817142" expanded="true" signature="621:630" ph="..." />
-            <marker date="1468685817142" expanded="true" signature="2070:2160" ph="INSERT INTO photos... " />
-            <marker date="1468685817142" expanded="true" signature="2109:2160" ph="SELECT user_... users" />
-            <marker date="1468685817142" expanded="true" signature="2611:2677" ph="INSERT INTO likes... " />
-            <marker date="1468685817142" expanded="true" signature="3208:3253" ph="SELECT * FRO... likes" />
-            <marker date="1468685817142" expanded="true" signature="3612:3722" ph="SELECT users... likes" />
-            <marker date="1468685817142" expanded="true" signature="4292:4356" ph="SELECT photo... photos" />
-            <marker date="1468685817142" expanded="true" signature="4802:4877" ph="UPDATE photo... " />
-            <marker date="1468685817142" expanded="true" signature="5314:5386" ph="UPDATE photo... " />
-            <marker date="1468685817142" expanded="true" signature="5871:5981" ph="SELECT photo... photos" />
-          </folding>
+        <state relative-caret-position="165">
+          <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/make_camagru.php">
+    <entry file="file://$PROJECT_DIR$/style/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="76" selection-start-line="14" selection-start-column="76" selection-end-line="14" selection-end-column="76" />
+        <state relative-caret-position="1224">
+          <caret line="376" column="0" selection-start-line="376" selection-start-column="0" selection-end-line="376" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/image_gal.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/video.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="692">
-          <caret line="158" column="61" selection-start-line="158" selection-start-column="61" selection-end-line="158" selection-end-column="61" />
+        <state relative-caret-position="846">
+          <caret line="164" column="63" selection-start-line="164" selection-start-column="15" selection-end-line="164" selection-end-column="63" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/gallery.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="994">
+          <caret line="80" column="47" selection-start-line="80" selection-start-column="47" selection-end-line="80" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/class/class.camagru.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="659">
+          <caret line="72" column="36" selection-start-line="72" selection-start-column="36" selection-end-line="72" selection-end-column="36" />
+          <folding>
+            <marker date="1468695667073" expanded="true" signature="621:630" ph="..." />
+            <marker date="1468695667073" expanded="true" signature="2070:2160" ph="INSERT INTO photos... " />
+            <marker date="1468695667073" expanded="true" signature="2109:2160" ph="SELECT user_... users" />
+            <marker date="1468695667073" expanded="true" signature="2612:2679" ph="SELECT * FRO... likes" />
+            <marker date="1468695667073" expanded="true" signature="2935:3001" ph="INSERT INTO likes... " />
+            <marker date="1468695667073" expanded="true" signature="3788:3833" ph="SELECT * FRO... likes" />
+            <marker date="1468695667073" expanded="true" signature="4192:4302" ph="SELECT users... likes" />
+            <marker date="1468695667073" expanded="true" signature="4872:4936" ph="SELECT photo... photos" />
+            <marker date="1468695667073" expanded="true" signature="5382:5457" ph="UPDATE photo... " />
+            <marker date="1468695667073" expanded="true" signature="5894:5966" ph="UPDATE photo... " />
+            <marker date="1468695667073" expanded="true" signature="6451:6561" ph="SELECT photo... photos" />
+            <marker date="1468695667073" expanded="true" signature="7009:7336" ph="SELECT photo... photos" />
+            <marker date="1468695667073" expanded="true" signature="7139:7210" ph="SELECT photo... likes" />
+          </folding>
         </state>
       </provider>
     </entry>

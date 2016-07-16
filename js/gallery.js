@@ -1,35 +1,13 @@
 /**
  * Created by opichou on 7/14/16.
  */
-function delete_cama(elem) {
-    var tmp_id = elem.parentNode.getAttribute('id');
-    var ajax = new XMLHttpRequest();
-    ajax.open("GET", 'delete_camagru.php?id='+tmp_id, true);
-    ajax.onreadystatechange = function() {
-        console.log(ajax.responseText);
-        if (ajax.responseText == "1") {
-            elem.parentNode.remove();
-        }
-    };
-    ajax.send();
-}
 
-function like_cama(elem) {
-    var user_id = document.getElementById("user_id").getAttribute('value');
-    var photo_id = elem.parentNode.getAttribute('id');
-    var ajax = new XMLHttpRequest();
-    var form_data = new FormData();
-    form_data.append('photo_id', photo_id);
-    form_data.append('user_id', user_id);
-    ajax.open('POST', 'like_camagru.php', true);
-    ajax.onreadystatechange = function() {
-        console.log("photo "+photo_id+"liked by"+user_id);
-        if (ajax.responseText == "1") {
-            like_animate(photo_id);
-        }
-    }
-    ajax.send(form_data);
-}
+var likes_counter = [0];
+
+
+
+
+
 
 window.onload = function() {
     var cama_model = document.getElementById('cama_model');
@@ -40,6 +18,8 @@ window.onload = function() {
     var height = 720;
     var user_id = document.getElementById("user_id").getAttribute('value');
     console.log(user_id);
+
+
 
     function add_cama(cama) {
         if (cama && cama.url && cama.id && cama.user_id && (cama != "error")) {
@@ -58,12 +38,53 @@ window.onload = function() {
                 gallery.appendChild(camagru);
                 camagru = document.getElementById(cama.id);
                 if (user_id != cama.user_id) {
-                    camagru.getElementsByClassName('cama_delete')[0].remove();
+                    var option_tab = document.createElement('div');
+                    option_tab.innerHTML = '<div class="cama cama_like">O</div>';
+                    option_tab.addEventListener('click', function() {
+                        var user_id = document.getElementById("user_id").getAttribute('value');
+                        var photo_id = this.parentNode.getAttribute('id');
+                        var ajax = new XMLHttpRequest();
+                        var form_data = new FormData();
+                        form_data.append('photo_id', photo_id);
+                        form_data.append('user_id', user_id);
+                        ajax.open('POST', 'like_camagru.php', true);
+                        ajax.onreadystatechange = function() {
+                            if (ajax.readyState == 4 && ajax.status == 200) {
+                                console.log("photo " + photo_id + "liked by" + user_id);
+                                if (ajax.responseText == "1") {
+                                    likes_counter[photo_id]++;
+                                    document.getElementById(photo_id).getElementsByClassName('cama_like_count')[0].innerHTML = likes_counter[photo_id] + " likes";
+                                }
+                            }
+                        }
+                        ajax.send(form_data);
+                    });
                 } else {
-                    camagru.getElementsByClassName('cama_like')[0].remove();
-
+                    var option_tab = document.createElement('div');
+                    option_tab.innerHTML = '<div class="cama cama_delete" onclick="delete_cama(this)">X&nbsp;&nbsp;</div>';
+                    option_tab.addEventListener('click', function(){
+                        var tmp_id = elem.parentNode.getAttribute('id');
+                        var ajax = new XMLHttpRequest();
+                        ajax.open("GET", 'delete_camagru.php?id='+tmp_id, true);
+                        ajax.onreadystatechange = function() {
+                            if (ajax.readyState == 4 && ajax.status == 200) {
+                                    console.log(ajax.responseText);
+                                if (ajax.responseText == "1") {
+                                    elem.parentNode.remove();
+                                }
+                            }
+                        };
+                        ajax.send();
+                    });
                 }
-                camagru.getElementsByClassName('cama_like_count').innerHTML = cama.likes+" likes";
+                camagru.appendChild(option_tab);
+                if ( isNaN(parseInt(cama.likes)) || cama.likes == 0) {
+                    likes_counter[cama.id] = '0';
+                }
+                else {
+                    likes_counter[cama.id] = cama.likes;
+                }
+                camagru.getElementsByClassName('cama_like_count')[0].innerHTML = likes_counter[cama.id]+" likes";
                 cama_count += 1;
                 return 1;
             } else {
@@ -73,6 +94,7 @@ window.onload = function() {
 
         }
     }
+
     
 
 
@@ -95,7 +117,6 @@ window.onload = function() {
                     }
                     current_page++;
                     dataset.forEach(function(current) {
-                        console.log("printing image"+ current.id+current.url+current.user_id+current.likes);
                         add_cama(current);
                     });
                 }

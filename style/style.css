@@ -252,12 +252,6 @@ a .form:hover {
 #canvas {
     width: 100%;
 }
-#snap {
-    width: 100%;
-    height: 5vw;
-    font-size: 4vw;
-    line-height: 5vw;
-}
 .hidden {
     display: none;
 }

@@ -24,10 +24,10 @@ if ($user->is_logged_in()){
             echo json_encode("error");
         }
     } elseif ($_FILES) {
+        $overlayer = $_POST['overlayer'];
         if ($camagru->makeCama($_FILES['userfile']['tmp_name'], $overlayer, $_SESSION['login'])) {
             $image['url'] = $camagru->getURL();
             $image['id'] = $camagru->getID();
-            $overlayer = $_POST['overlayer'];
             if ($image) {
                 echo json_encode($image);
             } else {

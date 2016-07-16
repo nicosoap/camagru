@@ -11,7 +11,7 @@ function delete_cama(elem) {
         if (ajax.responseText == "1") {
             elem.parentNode.remove();
         }
-    }
+    };
     ajax.send();
 }
 
@@ -39,6 +39,7 @@ window.onload = function(){
     var snap = document.getElementById('cama_snap');
     var allowedTypes = ['jpg', 'jpeg', 'gif', 'png'];
     var overlayer = ['img/overlayers/01.png', 'img/overlayers/02.png', 'img/overlayers/03.png', 'img/overlayers/04.png', 'img/overlayers/05.png', 'img/overlayers/06.png' ];
+    var layerIndex = 0
     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
 
     if (navigator.getUserMedia) {
@@ -46,18 +47,20 @@ window.onload = function(){
     }
 
     more.addEventListener('click', function(){
-        changeOverlayer('more', overlayer_div.src)
+        changeOverlayer('more');
     });
     less.addEventListener('click', function(){
-        changeOverlayer('less', overlayer_div.src)
+        changeOverlayer('less');
     });
     snap.addEventListener('click', take_photo);
 
-    function changeOverlayer(way, actual) {
+    function changeOverlayer(way) {
         if (way == 'more') {
-            overlayer_div.src = overlayer[(overlayer.indexOf(actual) + 1) % 6];
+            layerIndex = (layerIndex + 1) % 6;
+            overlayer_div.src = overlayer[layerIndex];
         }else {
-            overlayer_div.src = overlayer[(overlayer.indexOf(actual) + 5) % 6];
+            layerIndex = (layerIndex + 5) % 6;
+            overlayer_div.src = overlayer[layerIndex];
         }
     }
 
@@ -127,8 +130,8 @@ window.onload = function(){
             var ajax = new XMLHttpRequest();
             var form_data = new FormData();
             form_data.append('userfile', file, file.name);
-            form_data.append('overlayer', overlayer_div.src);
-            console.log(overlayer_div.src);
+            form_data.append('overlayer', overlayer[layerIndex]);
+            console.log(overlayer[layerIndex]);
             ajax.open("POST",'make_camagru.php',true);
             ajax.onreadystatechange = function() {
                 if (ajax.readyState == 4 && ajax.status == 200) {
@@ -139,7 +142,7 @@ window.onload = function(){
             ajax.send(form_data);
             return 1;
         }
-        else {
+        else if (isnowebcam == false) {
             console.log("takepicture from webcam");
             canvas.classList.remove('hidden');
             var context = canvas.getContext('2d');
@@ -156,8 +159,7 @@ window.onload = function(){
             var form_data = new FormData();
             form_data.append('userfile', data);
             form_data.append('webcam', "1");
-            form_data.append('overlayer', overlayer_div.src);
-            console.log(overlayer_div.src);
+            form_data.append('overlayer', overlayer[layerIndex]);
             ajax.open("POST",'make_camagru.php',true);
             ajax.onreadystatechange = function() {
                 if (ajax.readyState == 4 && ajax.status == 200) {
@@ -170,10 +172,10 @@ window.onload = function(){
             return 1;
         }
 
-    };
+    }
 
     function pageload(){
-        overlayer_div.src = overlayer[0];
+        overlayer_div.src = overlayer[layerIndex];
         var ajax = new XMLHttpRequest();
         var form_data = new FormData();
         form_data.append('perso', '1');

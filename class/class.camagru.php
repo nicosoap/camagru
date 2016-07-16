@@ -45,7 +45,7 @@ class camagru
             imagesavealpha($overlayer, true);
             imagesavealpha($camatmp, true);
             imagealphablending($camatmp, true);
-            if (imagecopy($camatmp, $overlayer, 0, 0, 0, 0, 1280, 720) != FALSE) {
+            if (imagecopy($camatmp, $overlayer, 0, 0, 0, 0, 1024, 768) != FALSE) {
                 $filedir = "uploads/";
                 $this->cama = $filedir.$this->user.time().".png";
                 if (imagepng($camatmp, $this->cama) != FALSE) {
@@ -66,19 +66,31 @@ class camagru
 
     public function likePhoto($user_id, $photo_id) {
         try {
-            $stmt = $this->db->prepare("INSERT INTO likes (user_id, photo_id) VALUES (:user_id, :photo_id)");
-            $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
-            $stmt->bindParam(":photo_id", $photo_id, PDO::PARAM_INT);
-            $stmt->execute();
-            if ($stmt->rowCount() == 1) {
-                return 1;
-            } else {
-                return 0;
-            }
+            $stmt0 = $this->db->prepare("SELECT * FROM likes WHERE user_id =:user_id AND photo_id =:photo_id");
+            $stmt0->bindParam(":user_id", $user_id);
+            $stmt0->bindParam(":photo_id", $photo_id);
+            $stmt0->execute();
+            if ($stmt0->rowCount() == 0) {
+                try {
+                    $stmt = $this->db->prepare("INSERT INTO likes (user_id, photo_id) VALUES (:user_id, :photo_id)");
+                    $stmt->bindParam(":user_id", $user_id, PDO::PARAM_INT);
+                    $stmt->bindParam(":photo_id", $photo_id, PDO::PARAM_INT);
+                    $stmt->execute();
+                    if ($stmt->rowCount() == 1) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                } catch (PDOException $e) {
+                    echo 'Connection failed: ' . $e->getMessage();
+                    return 0;
+                }
+            } else { return 0; }
         } catch (PDOException $e) {
-            echo 'Connection failed: ' . $e->getMessage();
+            echo 'Connection failed: '. $e->getMessage();
             return 0;
         }
+
     }
 
     public function getLikes($photo_id) {
@@ -167,11 +179,7 @@ class camagru
     public function getAllPhotos($user_id, $page) {
         if (isset($user_id) && ($user_id != "") && ($page >= 0)) {
             try {
-                $stmt = $this->db->prepare("( SELECT photos.photo_id AS `id`, photos.photo_url AS `url`, photos.user_id AS `user_id`, COUNT(likes.like_date) AS `likes` 
-                FROM photos LEFT JOIN likes ON photos.photo_id = likes.photo_id WHERE photos.voided = '0' AND photos.published = '1' GROUP BY `id` ) 
-                UNION ALL ( SELECT photos.photo_id AS `id`, photos.photo_url AS `url`, photos.user_id AS `user_id`, COUNT(likes.like_date) AS `likes` 
-                FROM photos RIGHT JOIN likes ON photos.photo_id = likes.photo_id 
-                WHERE photos.voided = '0' AND photos.published = '1' GROUP BY `id` ) ORDER BY id DESC LIMIT :offset, 25;");
+                $stmt = $this->db->prepare("SELECT photos.photo_id AS `id`, photos.photo_url AS `url`, photos.user_id AS `user_id`, l.likes AS `likes` FROM photos LEFT JOIN (SELECT photo_id, COUNT(like_date) AS likes FROM likes GROUP BY photo_id) AS l ON photos.photo_id = l.photo_id WHERE photos.voided = '0' AND photos.published = '1' ORDER BY id DESC LIMIT :offset, 25");
                 $stmt->bindParam(':offset', intval(($page - 1) * 25), PDO::PARAM_INT);
                 $stmt->execute();
                 return $stmt->fetchAll();
