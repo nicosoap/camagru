@@ -5,8 +5,9 @@
  * Date: 7/5/2016
  * Time: 8:26 AM
  */
-include("header.php");
-if (isset($_GET['forgot'])) {
+include_once("config/pdo_connect.php");
+if (isset($_GET['forgot']) && $_GET['forgot']!= "") {
+    include_once("header.php");
     ?>
 <div class="centered form-container">
     <form name="change_password" method="post" action="forgot.php">
@@ -32,11 +33,9 @@ if (isset($_GET['forgot'])) {
     else if(strlen($password) < 6){
         $error = "PASSWORD MUST BE AT LEAST 6 CHARACTERS !";
     } else {
-        echo "CHACHACHA";
-        $user->change_password(hash("whirlpool", $password), $user_id);
-        echo "CHICHICHI";
         $user->redirect("signin.php");
     }
+    include_once("header.php");
     ?>
     <div class="centered form-container">
     <form name="change_password" method="post" action="forgot.php">
@@ -58,6 +57,7 @@ if (isset($_GET['forgot'])) {
             $error = "INCORRECT EMAIL ADDRESS !";
         }
     }
+    include_once("header.php");
 ?>
 <div class="centered form-container">
     <form name="change_password" method="post" action="forgot.php">

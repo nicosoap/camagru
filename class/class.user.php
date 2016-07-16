@@ -95,16 +95,16 @@ class user
         try {
             $token = md5($email.time());
             $stmt = $this->db->prepare("INSERT INTO tokens(user_id, usag, token) SELECT user_id, 'passwd', :token FROM users WHERE email =:email LIMIT 1");
-            $stmt->execute(array(':email'=> $this->db->quote($email), ':token' => $this->db->quote($token)));
+            $stmt->execute(array(':email'=> $this->db->quote($email), ':token' => $token));
             $email_headers = "From: contact@liveoption.io\r\n";
             $email_headers .= "MIME-Version: 1.0\r\n";
             $email_headers .= "Content-type: text/html; charset=ISO-8859-1\r\n";
             $email_content = "<html><head><style>body { \nbackground-color: darkgray; color: white; \nfont-family: 'Helvetica', 'Arial', sans-serif; }</style></head><body>\n";
             $email_content .= "<h2>Hello,</h2>\n";
             $email_content .= "This message was sent to you because a new password was requested\n";
-            $email_content .= "for your account on CAMAGRU !!! \n<a href='http://".$_SERVER['SERVER_NAME']."/forgot.php?forgot=$token'>\nIf you requested a new password, click here</a>\n";
+            $email_content .= "for your account on CAMAGRU !!! \n<a href='http://".$_SERVER['SERVER_NAME']. dirname($_SERVER['PHP_SELF'])."/forgot.php?forgot=$token'>\nIf you requested a new password, click here</a>\n";
             $email_content .= "or copy-paste the following link to your favorite browser:\n";
-            $email_content .= "http://".$_SERVER['SERVER_NAME']."/forgot.php?$token\n";
+            $email_content .= "http://".$_SERVER['SERVER_NAME']. dirname($_SERVER['PHP_SELF'])."/forgot.php?$token\n";
             $email_content .= "If you didn't request a new password, please disregard this message.\n";
             $email_content .= "<br /><br /><br /><br /><br /><br /><br />";
             $email_content .= "</body></html>";
@@ -112,6 +112,7 @@ class user
                 mail($email, "Change your CAMAGRU password", $email_content, $email_headers);
                 return 1;
             } else {
+                echo "error sending email";
                 return 0;
             }
         }
