@@ -7,7 +7,7 @@
  */
 ?>
 <div class="footer">
-        < <a href="#">A</a> - <a href="#">B</a> - <a href="#">C</a> ><br />
+        <a href="https://www.liveoption.io/">liveoption.io</a>&nbsp;opichou 2016
     </div>
 </div>
 </body>

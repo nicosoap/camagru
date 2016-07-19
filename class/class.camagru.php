@@ -29,7 +29,7 @@ class camagru
         ini_set('display_errors', true);
         $this->user = $login;
         $image_info = getimagesize($image);
-        if (($image_info != false) /*&& (($image_info[0]/$image_info[1]) > 1.25) && (($image_info[0]/$image_info[1]) < 1.48) && ($image_info[0] <= 5120) && ($image_info[0] >= 155)*/){
+        if (($image_info != false)){
             switch ($image_info['mime']) {
                 case 'image/gif': $camatmp = imagecreatefromgif($image); break;
                 case 'image/jpeg': $camatmp = imagecreatefromjpeg($image); break;
@@ -144,7 +144,7 @@ class camagru
             } else {
                 return 0;
             }
-        } catch (PDOEsception $e) {
+        } catch (PDOException $e) {
             echo "Connection failed: ".$e->getMessage();
         }
     }
@@ -166,7 +166,7 @@ class camagru
     public function getMyPhotos($user_id) {
         if (isset($user_id) && $user_id != "") {
             try {
-                $stmt = $this->db->prepare("SELECT photo_id AS id, photo_url AS url FROM photos WHERE user_id=:user_id AND voided=0 ORDER BY photo_id DESC");
+                $stmt = $this->db->prepare("SELECT photo_id AS id, photo_url AS url FROM photos WHERE user_id=:user_id AND voided=0 ORDER BY photo_id ASC");
                 $stmt->execute(array(':user_id' => $user_id));
                 return $stmt->fetchAll();
             } catch (PDOException $e) {
@@ -179,8 +179,17 @@ class camagru
     public function getAllPhotos($user_id, $page) {
         if (isset($user_id) && ($user_id != "") && ($page >= 0)) {
             try {
-                $stmt = $this->db->prepare("SELECT photos.photo_id AS `id`, photos.photo_url AS `url`, photos.user_id AS `user_id`, l.likes AS `likes` FROM photos LEFT JOIN (SELECT photo_id, COUNT(like_date) AS likes FROM likes GROUP BY photo_id) AS l ON photos.photo_id = l.photo_id WHERE photos.voided = '0' AND photos.published = '1' ORDER BY id DESC LIMIT :offset, 25");
-                $stmt->bindParam(':offset', intval(($page - 1) * 25), PDO::PARAM_INT);
+                $stmt = $this->db->prepare("SELECT photos.photo_id AS `id`, photos.photo_url AS `url`, photos.user_id AS `user_id`, l.likes AS `likes` , c.comments AS `comments`
+                  FROM photos 
+                  LEFT JOIN 
+                    (SELECT photo_id, COUNT(like_date) AS likes FROM likes GROUP BY photo_id)
+                    AS l ON photos.photo_id = l.photo_id
+                  LEFT JOIN 
+                    (SELECT photo_id, COUNT(comment_date) AS comments FROM comments GROUP BY photo_id)
+                    AS c ON photos.photo_id = c.photo_id 
+                  WHERE photos.voided = '0' AND photos.published = '1' 
+                  ORDER BY id DESC LIMIT :offset, 10");
+                $stmt->bindParam(':offset', intval(($page - 1) * 10), PDO::PARAM_INT);
                 $stmt->execute();
                 return $stmt->fetchAll();
             } catch (PDOException $e) {
@@ -188,6 +197,74 @@ class camagru
                 return 0;
             }
         } else { return 0; }
+    }
+
+    public function getComments($user_id, $photo_id) {
+        if (isset($this->user_id) && ($user_id === $this->user_id)){
+            try {
+                $stmt = $this->db->prepare("SELECT comments.comment_text AS `content`, users.login AS `user_login` 
+                  FROM comments LEFT JOIN users ON comments.user_id = users.user_id
+                  WHERE photo_id =:photo_id AND comments.moderated = 0");
+                $stmt->bindParam(":photo_id", $photo_id, PDO::PARAM_INT);
+                $stmt->execute();
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } catch (PDOException $e) {
+                echo "Connection failed: ".$e->getMessage();
+                return null;
+            }
+
+        }
+    }
+
+    public function postComment($user_id, $photo_id, $content) {
+        if (isset($this->user_id) && $user_id === $this->user_id){
+            try {
+                $stmt = $this->db->prepare("INSERT INTO comments (photo_id, user_id, comment_text) VALUES (:photo_id, :user_id, :content)");
+                $stmt->bindParam(":photo_id", $photo_id, PDO::PARAM_INT);
+                $stmt->bindParam(":user_id",  $user_id, PDO::PARAM_INT);
+                $stmt->bindParam(":content", $content, PDO::PARAM_STR);
+                $stmt->execute();
+                if ($stmt->rowCount() != 0){
+                    try {
+                        $stmt2 = $this->db->prepare("SELECT users.email AS email, photos.photo_id, users.user_id FROM photos LEFT JOIN users on photos.user_id = users.user_id WHERE photo_id =:photo_id");
+                        $stmt2->bindParam(":photo_id", $photo_id, PDO::PARAM_INT);
+                        $stmt2->execute;
+                        if ($stmt2->rowCount() === 1) {
+                            $row = $stmt2->fetch();
+                            $email = $row['email'];
+                            $email_headers = "From: contact@liveoption.io\r\n";
+                            $email_headers .= "MIME-Version: 1.0\r\n";
+                            $email_headers .= "Content-type: text/html; charset=ISO-8859-1\r\n";
+                            $email_content = "<html><head><style>body { \nbackground-color: darkgray; color: white; \nfont-family: 'Helvetica', 'Arial', sans-serif; }</style></head><body>\n";
+                            $email_content .= "<h2>Hello,</h2>\n";
+                            $email_content .= "Good news, someone has comented on your photo !\n";
+                            $email_content .= "Here is the comment:\n";
+                            $email_content .= "$content<br /><br />\n";
+                            $email_content .= "See you soon on CAMAGRU !!!\n";
+                            $email_content .= "<br />https://".$_SERVER['SERVER_NAME']."\n";
+                            $email_content .= "</body></html>";
+
+                            if (mail($email, "You received a new comment!", $email_content, $email_headers)) {
+                                return 1;
+                            } else {
+                                return 0;
+                            }
+                        }
+                        else {
+                            return $stmt->rowCount();
+                        }
+                    } catch (PDOException $e) {
+                        echo "Connection failed: ".$e->getMessage();
+                        return 0;
+                    }
+                } else {
+                    return 0;
+                }
+            } catch (PDOException $e) {
+                echo "Connection failed: ".$e->getMessage();
+                return 0;
+            }
+        }
     }
 
 }

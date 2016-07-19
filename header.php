@@ -21,5 +21,5 @@
         <span id="title"><h1>CAMAGRU!!!</h1></span>
         <span class="img" ><a href="gallery.php"><img src="img/random-icon.png"/></a> </span>
         <span class="img" ><a href="home.php" ><img src="img/camera2-icon.png"/></a></span>
-        <span class="stick-right"><a href="logout.php">LOGOUT</a> </span>
+        <?php if ($user->is_logged_in()) { ?> <span class="stick-right"><a href="logout.php">LOGOUT</a> </span> <?php } ?>
     </div>

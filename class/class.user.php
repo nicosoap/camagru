@@ -25,9 +25,9 @@ class user
         $email_content .= "<h2>Hi $username,</h2>\n";
         $email_content .= "Thank you for signin'up to CAMAGRU!!! Before you can start\n";
         $email_content .= "pimping your selfies, you needa verify your email address by\n";
-        $email_content .= "<a href='http://".$_SERVER['SERVER_NAME']."/verify.php?login=$username'>\ngoing here</a> or copy-paste that link to your\n";
+        $email_content .= "<a href='https://".$_SERVER['SERVER_NAME']. dirname($_SERVER['PHP_SELF'])."/verify.php?login=$username'>\ngoing here</a> or copy-paste that link to your\n";
         $email_content .= "browser :<br />\n";
-        $email_content .= "http://".$_SERVER['SERVER_NAME']."/verify.php?login=$username\n";
+        $email_content .= "https://".$_SERVER['SERVER_NAME']. dirname($_SERVER['PHP_SELF'])."/verify.php?login=$username\n";
         $email_content .= "</body></html>";
 
         if (!(mail($email, "Verify your CAMAGRU account", $email_content, $email_headers))) {
@@ -108,9 +108,9 @@ class user
             $email_content = "<html><head><style>body { \nbackground-color: darkgray; color: white; \nfont-family: 'Helvetica', 'Arial', sans-serif; }</style></head><body>\n";
             $email_content .= "<h2>Hello,</h2>\n";
             $email_content .= "This message was sent to you because a new password was requested\n";
-            $email_content .= "for your account on CAMAGRU !!! \n<a href='http://".$_SERVER['SERVER_NAME']. dirname($_SERVER['PHP_SELF'])."/forgot.php?forgot=$token'>\nIf you requested a new password, click here</a>\n";
+            $email_content .= "for your account on CAMAGRU !!! \n<a href='https://".$_SERVER['SERVER_NAME']. dirname($_SERVER['PHP_SELF'])."/forgot.php?forgot=$token'>\nIf you requested a new password, click here</a>\n";
             $email_content .= "or copy-paste the following link to your favorite browser:\n";
-            $email_content .= "http://".$_SERVER['SERVER_NAME']. dirname($_SERVER['PHP_SELF'])."/forgot.php?$token\n";
+            $email_content .= "https://".$_SERVER['SERVER_NAME']. dirname($_SERVER['PHP_SELF'])."/forgot.php?$token\n";
             $email_content .= "If you didn't request a new password, please disregard this message.\n";
             $email_content .= "<br /><br /><br /><br /><br /><br /><br />";
             $email_content .= "</body></html>";

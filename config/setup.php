@@ -41,6 +41,15 @@ try {
                   like_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                   PRIMARY KEY (like_id)
                   ) COMMENT='Likes table';");
+    $pdo_connect->query("CREATE TABLE IF NOT EXISTS comments (
+                  comment_id int(22) NOT NULL AUTO_INCREMENT,
+                  comment_text TEXT NOT NULL,
+                  user_id int(11) NOT NULL,
+                  photo_id int(11) NOT NULL,
+                  moderated int(11) NOT NULL DEFAULT '0',
+                  comment_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                  PRIMARY KEY (comment_id)
+                  ) COMMENT='Comments table';");
     $pdo_connect->query("CREATE TABLE IF NOT EXISTS tokens (
                   token_id int(11) NOT NULL AUTO_INCREMENT,
                   user_id int(11) NOT NULL,

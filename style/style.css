@@ -29,118 +29,433 @@ body {
 }
 @media only screen and (min-device-width: 320px) and (max-device-width: 667px) and (orientation : portrait) {
     body {
-        font-size: 3.5vmax;
+        font-size: 2.5vh;
     }
     .header {
         width: 100%;
         min-width: 320px;
-        height: 15vh;
+        height: 6vh;
         float: left;
         margin: 0;
     }
+    h1 {
+        font-size: 5vh;
+        line-height: 8vh;
+        height: 8vh;
+    }
     .header .img{
-        height: 13vmin;
+        height: 5vh;
         margin: 0.8vh 1vw 0.5vh;
     }
     .header img{
-        height: 13vh;
+        height: 5vh;
     }
     .main {
         width: 100vw;
-        height: 66.25vw;
+        min-height: 75vw;
         float: left;
         margin: 0;
+        position: relative;
+        display: inline-block;
     }
     .sidebar {
         width: 100vw;
-        height: 66.25vw;
-        float: right;
+        display: inline-block;
+        float: left;
         margin: 0;
     }
     .footer {
         width: 100%;
-        height: 10vh;
+        height: 5vh;
         float: left;
         text-align: center;
         margin: 0;
+        font-size: 3vh;
+    }
+    .camagru-visual {
+        width: 100%;
+        height: 75vw;
+    }
+    .comment-box {
+        background-color: rgba(255, 255, 255, 0.4);
+        animation: comment-box-anim;
+        animation-duration: 1s;
+    }
+    @keyframes comment-box-anim {
+        from {max-height : 0vw;
+            opacity: 0;}
+        to {max-height: 100vh;
+            opacity: 100;}
+    }
+    .cama_delete {
+        line-height: 75vw;
+    }
+    .control_panel .control_button {
+        line-height: 43vw;
+    }
+    #videoFallback {
+        height: 85vw;
+    }
+    .cama-sidebar-view {
+        width: 100%;
+        height: 75vw;
+    }
+
+    .cama_display {
+        position: relative;
+        width: 100vw;
+        min-height: 75vw;
+        display: inline-block;
+        float: left;
+    }
+    .restrict {
+        height: 37vw;
+    }
+
+    .cama_display img {
+        height: 75vw;
+    }
+
+    .cama_delete_gal {
+        position: relative;
+        width: 100%;
+        display: inline-block;
+        float: left;
+        line-height: 59vw;
+        text-align: center;
+        height: 60vw;
+    }
+    .cama_like_count {
+        position: relative;
+        display: inline-block;
+        float: left;
+        color: gray;
+        width: 50%;
+        line-height: 14vw;
+        box-sizing: border-box;
+        height: 15vw;
+        padding: 0 0 1.5vw 1.5vw;
+    }
+    .cama_comment_count {
+        position: relative;
+        display: inline-block;
+        float: left;
+        text-align: right;
+        color: gray;
+        width: 50%;
+        box-sizing: border-box;
+        height: 15vw;
+        line-height: 14vw;
+        padding: 0 1.5vw 1.5vw 0;
+    }
+    .cama_comment_count:hover,
+    .cama_like_count:hover {
+        background-color: rgba(55, 190, 190, 0.4);
+        cursor: pointer;
+    }
+    .cama_preview {
+        margin: 0 0 5px 0;
+        display: inline-block;
+        float: right;
+        padding: 0 0 0 0;
+        position: relative;
+        animation-name: cama-preview-anim;
+        animation-duration: 1s;
+    }
+
+    .cama_like {
+        line-height: 59vw;
+        height: 60vw;
+    }
+
+    @keyframes cama-preview-anim {
+        from {max-height : 0vw;
+            opacity: 0;}
+        to {max-height: 75vw;
+            opacity: 100;}
     }
 }
 @media only screen and (min-device-width : 375px) and (max-device-width : 732px) and (orientation : landscape) {
     body {
-        font-size: 3.5vmax;
+        font-size: 3vw;
     }
     .header {
         width: 100%;
         min-width: 320px;
+        height: 8vh;
         float: left;
-        line-height: 13vh;
-        height: 15vh;
-        margin: 0;
+        margin: -2vh 0 1.5vh 0;
+        position: relative;
     }
     .header .img{
-        height: 7vmin;
-        margin: 0.8vh 1vw 0.5vh;
+        height: 8vh;
+        margin: -2vw 2vw 2.5vh 0;
+        position: relative;
+        top : -3.5vh;
     }
     .header img{
-        height: 7vmax;
+        height: 7vh;
     }
     .main {
-        width: 80vw;
-        height: 55vw;
+        position: relative;
+        width: 63vw;
         float: left;
-        padding: 0;
         margin: 0;
+        min-height: 47.25vw;
     }
     .sidebar {
-        width: 18vw;
-        height: 55vw;
+        width: 36.5vw;
         float: right;
-        margin:0;
+        margin: 0;
+        max-height: 52vw;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+    .cama-sidebar-view {
+        width: 100%;
+        height: 21vw;
     }
     .footer {
         width: 100%;
-        height: 10vh;
+        height: 3vh;
         float: left;
         text-align: center;
-        margin:0;
+        margin: 2vh 0 0 0;
+        font-size: 2.5vh;
+    }
+    .camagru-visual {
+        width: 100%;
+        height: 47.25vw;
+    }
+    .cama_delete {
+        line-height: 28vw;
+    }
+    .control_panel .control_button {
+        line-height: 46vw;
+    }
+    #videoFallback {
+        height: 52vw;
+    }
+
+    .cama_display {
+        position: relative;
+        width: 50vw;
+        min-height: 37vw;
+        display: inline-block;
+        float: left;
+    }
+    .restrict {
+        height: 37vw;
+    }
+
+    .cama_display img {
+        height: 37vw;
+    }
+
+    .cama_delete_gal {
+        position: relative;
+        width: 100%;
+        display: inline-block;
+        float: left;
+        line-height: 32.5vw;
+        text-align: center;
+        height: 32.5vw;
+    }
+    .cama_like_count {
+        position: relative;
+        display: inline-block;
+        float: left;
+        color: gray;
+        width: 50%;
+        line-height: 4.5vw;
+        box-sizing: border-box;
+        height: 4.5vw;
+        padding: 0 0 1.5vw 1.5vw;
+    }
+    .cama_comment_count {
+        position: relative;
+        display: inline-block;
+        float: left;
+        text-align: right;
+        color: gray;
+        width: 50%;
+        box-sizing: border-box;
+        height: 4.5vw;
+        line-height: 4.5vw;
+        padding: 0 1.5vw 1.5vw 0;
+    }
+    .cama_comment_count:hover,
+    .cama_like_count:hover {
+        background-color: rgba(55, 190, 190, 0.4);
+        cursor: pointer;
+    }
+    h1 {
+        font-size: 18vh;
+        line-height: 12vmin;
+        height: 13vmin;
+    }
+
+    .cama_preview {
+         margin: 0 0 5px 0;
+         display: inline-block;
+         float: right;
+         padding: 0 0 0 0;
+         position: relative;
+         animation-name: cama-preview-anim;
+         animation-duration: 1s;
+     }
+
+    @keyframes cama-preview-anim {
+        from {max-height : 0vw;
+            opacity: 0;}
+        to {max-height: 21vw;
+            opacity: 100;}
+    }
+
+    .cama_like {
+        line-height: 32.5vw;
+        height: 32.5vw;
     }
 }
 @media only screen and (min-device-width: 733px) {
     body {
-        font-size: 3vmax;
+        font-size: 3vw;
     }
     .header {
         width: 100%;
         min-width: 320px;
-        height: 15vh;
+        height: 12vh;
         float: left;
-        margin: 0;
+        margin: -1vh 0;
     }
     .header .img{
         height: 12vh;
-        margin: 1.5vh 2vw 0.5vh 0;
+        margin: -1.5vh 2vw 1.5vh 0;
     }
     .header img{
-        height: 11vmin;
+        height: 8vh;
     }
     .main {
-        width: 70vw;
-        height: 55vw;
+        position: relative;
+        width: 60vw;
         float: left;
         margin: 0;
+        max-height: 55vw;
+        min-height: 80vh;
     }
     .sidebar {
-        width: 28vw;
+        width: 38vw;
         float: right;
         height: 55vw;
         margin: 0;
+        max-height: 55vw;
+        min-height: 80vh;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+    .cama-sidebar-view {
+        width: 100%;
+        height: 28vw;
     }
     .footer {
         width: 100%;
-        height: 10vh;
+        height: 5vh;
         float: left;
         text-align: center;
         margin: 0;
+        font-size: 3vh;
+    }
+    .camagru-visual {
+        width: 100%;
+        height: 45vw;
+    }
+    .cama_delete {
+        line-height: 28vw;
+    }
+    .control_panel .control_button {
+        line-height: 43vw;
+    }
+    #videoFallback {
+        height: 55vw;
+    }
+
+    .cama_display {
+        position: relative;
+        width: 50vw;
+        min-height: 37vw;
+        display: inline-block;
+        float: left;
+    }
+    .restrict {
+        height: 37vw;
+    }
+
+    .cama_display img {
+        height: 37vw;
+    }
+
+    .cama_delete_gal {
+        position: relative;
+        width: 100%;
+        display: inline-block;
+        float: left;
+        line-height: 32.5vw;
+        text-align: center;
+        height: 32.5vw;
+    }
+    .cama_like_count {
+        position: relative;
+        display: inline-block;
+        float: left;
+        color: gray;
+        width: 50%;
+        line-height: 4.5vw;
+        box-sizing: border-box;
+        height: 4.5vw;
+        padding: 0 0 1.5vw 1.5vw;
+    }
+    .cama_comment_count {
+        position: relative;
+        display: inline-block;
+        float: left;
+        text-align: right;
+        color: gray;
+        width: 50%;
+        box-sizing: border-box;
+        height: 4.5vw;
+        line-height: 4.5vw;
+        padding: 0 1.5vw 1.5vw 0;
+    }
+    .cama_comment_count:hover,
+    .cama_like_count:hover {
+        background-color: rgba(55, 190, 190, 0.4);
+        cursor: pointer;
+    }
+    h1 {
+        font-size: 14vh;
+        line-height: 12vmin;
+        height: 13vmin;
+    }
+    .cama_preview {
+        margin: 0 0 5px 0;
+        display: inline-block;
+        float: right;
+        padding: 0 0 0 0;
+        position: relative;
+        animation-name: cama-preview-anim;
+        animation-duration: 1s;
+    }
+
+    @keyframes cama-preview-anim {
+        from {max-height : 0vw;
+            opacity: 0;}
+        to {max-height: 28vw;
+            opacity: 100;}
+    }
+
+    .cama_like {
+        line-height: 32.5vw;
+        height: 32.5vw;
     }
 }
 @media tv {
@@ -151,9 +466,6 @@ h1 {
     font-family: Camagru, "Helvetica-Neue", "Helvetica", "Arial", sans-serif;
     color: white;
     font-weight: 200;
-    font-size: 16vmin;
-    line-height: 12vmin;
-    height: 13vmin;
     margin: -0.5vh 0 0.5vh 0;
     display: inline-block;
     text-overflow: clip;
@@ -169,34 +481,49 @@ a:hover {
     text-decoration: none;
 }
 
+.absolute-0 {
+    position: absolute;
+    top: 0;
+}
 .preview,
 #videoElement,
 .screen {
-    height: 52.5vw;
-    width: 70vw;
-
 }
 
 .screen {
-    position: relative;
-    top: -52.5vw;
-    z-index: 99;
+    position: absolute;
+    top: 0;
     color: hotpink;
 }
 
 .control_panel {
-    position: relative;
-    top: -52.5vw;
+    position: absolute;
+    top: 0;
 }
+
+.layer-1 {
+    z-index: 5;
+}
+
+.layer-2 {
+    z-index: 50;
+}
+
+.layer-3 {
+    z-index: 99;
+}
+
 .control_panel .control_button {
     float:left;
     display: inline-block;
     height: 100%;
     text-align: center;
-    line-height: 52.5vw;
+    color: white;
 }
 .control_panel .control_button:hover {
     background-color: rgba(105, 105, 205, 0.4);
+    color: hotpink;
+    cursor: pointer;
 }
 .control_panel .change {
     width: 15%;
@@ -204,10 +531,7 @@ a:hover {
 .control_panel .button_snap {
     width:70%;
 }
-#overlayer {
-    width: 70vw;
-    height: 52.5vw;
-}
+
 .stick-right {
     margin: 2vh 2vw;
     float: right;
@@ -215,11 +539,14 @@ a:hover {
     line-height: 100%;
 }
 .centered {
+    position: relative;
     display: inline-block;
     float: left;
     width: 100vw;
 }
-input {
+input,
+textarea {
+    box-sizing: border-box;
     padding-left: 2vw;
     width: 100%;
     border: none;
@@ -235,6 +562,7 @@ input:hover {
     border: none;
     border-top: 3vh solid darkgrey;
     color: white;
+    cursor: pointer;
 }
 input:focus {
     padding-left: 2vw;
@@ -308,7 +636,7 @@ a .form:hover {
     padding-left: 2vw;
     width: 100%;
     border: none;
-    border-top: 3vh solid darkgrey;
+    border-top: 0 solid darkgrey;
     color: darkgrey;
     background-color: white;
     font-size: inherit;
@@ -354,18 +682,11 @@ a .form:hover {
     display: none;
 }
 
-.cama_preview {
-    margin: 0 0;
-    width: 100%;
-    display: inline-block;
-    float: right;
-    padding: 0 0 15px 0;
-}
-
 .cama_preview img {
-    height: 100%;
     overflow: hidden;
     z-index: 5;
+    position: absolute;
+    top: 0;
 }
 
 .cama_img {
@@ -373,31 +694,33 @@ a .form:hover {
 }
 
 .cama_delete {
-    position: relative;
-    top: -10vw;
-    width: 100%;
-    height: 100%;
     z-index: 99;
     text-align: center;
-    line-height: 100%;
+    position: absolute;
+    top: 0;
 }
 
-.cama_delete:hover {
-    cursor: hand;
+
+.cama_delete:hover,
+.cama_delete_gal:hover {
+    cursor: pointer;
     background-color: rgba(255, 0, 0, 0.2);
+    color: hotpink;
 }
 
 .cama_like {
     position: relative;
-    top: -10vw;
     width: 100%;
-    height: 100%;
-    z-index: 99;
+    display: inline-block;
+    float: left;
     text-align: center;
-    line-height: 100%;
 }
 
 .cama_like:hover {
     cursor: hand;
     background-color: rgba(255, 105, 180, 0.2);
+}
+
+.comment-box {
+    background-color: rgba(255, 255, 255, 0.4);
 }

@@ -32,9 +32,11 @@ include_once("header.php");
     <input type="text" name="login" placeholder="Login:" <?php if (isset($_COOKIE['login'])) { echo 'value="'.$_COOKIE['login'].'"'; } ?> required />
     <input type="password" name="passwd" placeholder="Password:" <?php if (isset($_COOKIE['passwd'])) { echo 'value="'.$_COOKIE['passwd'].'"'; } ?>required />
     <input type="submit" name="submit" value="CONNECT !!!">
-    <input type="checkbox" name="save" placeholder="remember me" value="true"/>
-    <a href="forgot.php"><span>forgot password</span></a>
-    <a href="signup.php">Sign up !</a>
+    <input style="display: none;" type="checkbox" name="save" placeholder="remember me" value="true"/>
+    <div style="text-align: center;">
+        <a href="forgot.php"><span>forgot password ?</span></a>&nbsp;
+        <a href="signup.php">Sign up !</a>
+    </div>
 </form>
 </div>
 <?php

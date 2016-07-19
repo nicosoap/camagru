@@ -47,8 +47,8 @@ if (isset($_POST["submit"]) && $_POST['submit'] == 'SUBMIT!') {
     else if($_POST['passwd1']=="") {
         $error[] = "PROVIDE PASSWORD !";
     }
-    else if(strlen($_POST['passwd1']) < 6){
-        $error[] = "PASSWORD MUST BE AT LEAST 6 CHARACTERS !";
+    else if( !preg_match_all('$\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])(?=\S*[\W])\S*$', $_POST['passwd1'])){
+        $error[] = "PASSWORD MUST BE AT LEAST 8 CHARACTERS LONG AND HAVE lowercase LETTERS, UPPERCASE LETTERS, DIGITS AND SPECIAL CHARACTERS !";
     }
     else if (check_username($login, $email) == 0) {
         $error[] = "LOGIN OR EMAIL ALREADY TAKEN !";
